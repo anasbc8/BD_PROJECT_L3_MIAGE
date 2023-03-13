@@ -1,11 +1,8 @@
-
-package fr.uga.l3miage.library.data.domain;
+package fr.uga.l3miage.photonum.data.domain;
 
 import java.util.Objects;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 @Entity
