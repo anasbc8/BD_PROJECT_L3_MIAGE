@@ -4,14 +4,22 @@ import java.util.Set;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "Client")
 @DiscriminatorValue("1")
 public class Client extends Person {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String email;
     private String password;
+    @OneToMany
     private Set<Photo> ownedImages;
 
     public Set<Photo> getOwnedImages() {

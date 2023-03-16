@@ -7,20 +7,12 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "deliveryAddress")
-public class DeliveryAddress {
-    private String address;
+@Table(name = "*Address")
+public class Adress {
+
     private String name;
     @ManyToMany(mappedBy = "adresses")
     private Set<Person> habitants;
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getName() {
         return this.name;
@@ -37,4 +29,5 @@ public class DeliveryAddress {
     public void setHabitants(Set<Person> habitants) {
         this.habitants = habitants;
     }
+
 }

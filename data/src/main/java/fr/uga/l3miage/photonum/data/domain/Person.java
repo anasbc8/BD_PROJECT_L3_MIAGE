@@ -38,13 +38,13 @@ public abstract class Person {
     private String lastName;
 
     @ManyToMany
-    private Set<DeliveryAddress> adresses;
+    private Set<Adress> adresses;
 
-    public Set<DeliveryAddress> getAdresses() {
+    public Set<Adress> getAdresses() {
         return this.adresses;
     }
 
-    public void setAdresses(Set<DeliveryAddress> adresses) {
+    public void setAdresses(Set<Adress> adresses) {
         this.adresses = adresses;
     }
 
