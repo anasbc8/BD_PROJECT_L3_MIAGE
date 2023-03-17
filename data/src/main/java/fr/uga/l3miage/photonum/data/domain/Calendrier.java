@@ -4,12 +4,15 @@ import java.util.Set;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Calendrier")
 @DiscriminatorValue("1")
 public class Calendrier extends Impression {
+
+    @OneToMany
     private Set<Page> pages;
 
     public Set<Page> getPages() {

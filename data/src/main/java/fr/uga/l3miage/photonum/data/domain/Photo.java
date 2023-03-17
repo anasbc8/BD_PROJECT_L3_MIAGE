@@ -3,13 +3,25 @@ package fr.uga.l3miage.photonum.data.domain;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@DiscriminatorValue("1")
 public class Photo extends Image {
-    private Image image;
     private String retouching;
     @ManyToOne
     private Client owner;
+    @ManyToOne
+    private Page page;
+    @ManyToMany(mappedBy = "photoCollection")
+    private Set<Impression> impressions;
+
+    @OneToMany
+    private Set<Album> albums;
+
+    public Photo() {
+
+    }
 
     public Client getOwner() {
         return this.owner;
@@ -17,14 +29,6 @@ public class Photo extends Image {
 
     public void setOwner(Client owner) {
         this.owner = owner;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
     }
 
     public String getRetouching() {
@@ -35,6 +39,30 @@ public class Photo extends Image {
         this.retouching = retouching;
     }
 
+    public Page getPage() {
+        return page;
+    }
+
+    public void setPage(Page page) {
+        this.page = page;
+    }
+
+    public Set<Impression> getImpressions() {
+        return impressions;
+    }
+
+    public void setImpressions(Set<Impression> impressions) {
+        this.impressions = impressions;
+    }
+
+    public Set<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Set<Album> albums) {
+        this.albums = albums;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -42,11 +70,11 @@ public class Photo extends Image {
         if (o == null || getClass() != o.getClass())
             return false;
         Photo ph = (Photo) o;
-        return this.image == ph.image && this.retouching == ph.retouching;
+        return this.owner == ph.owner && this.retouching == ph.retouching;
     }
 
     @Override
     public int HashCode() {
-        return Objects.hash(this.image, this.retouching);
+        return Objects.hash(this.owner, this.retouching);
     }
 }

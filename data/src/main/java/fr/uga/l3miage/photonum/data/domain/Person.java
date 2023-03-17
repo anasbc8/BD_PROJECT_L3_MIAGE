@@ -24,40 +24,36 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Person")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Person {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    @Column(name = "id")
     private String id;
     @Column(nullable = false)
-    private String fullName;
+    private String firstName;
     @Column(nullable = false)
     private String lastName;
 
-    @ManyToMany
-    private Set<Adress> adresses;
-
-    public Set<Adress> getAdresses() {
-        return this.adresses;
+    public String getId() {
+        return id;
     }
 
-    public void setAdresses(Set<Adress> adresses) {
-        this.adresses = adresses;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getFullName() {
-        return this.fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return this.lastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {

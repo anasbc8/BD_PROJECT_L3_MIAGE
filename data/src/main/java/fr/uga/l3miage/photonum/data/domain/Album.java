@@ -2,16 +2,16 @@ package fr.uga.l3miage.photonum.data.domain;
 
 import java.util.Set;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Album")
 @DiscriminatorValue("2")
 public class Album extends Impression {
+    @OneToOne
     private Photo coverPhoto;
     private String title;
+    @OneToMany
     private Set<Page> pages;
 
     public Photo getCoverPhoto() {

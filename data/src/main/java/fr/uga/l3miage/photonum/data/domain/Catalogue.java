@@ -18,7 +18,7 @@ public enum Catalogue {
         this.price = price;
     }
 
-    public String getreference() {
+    public String getReference() {
         return reference;
     }
 
@@ -28,6 +28,5 @@ public enum Catalogue {
 
     public double getPrice() {
         return price;
-
     }
 }

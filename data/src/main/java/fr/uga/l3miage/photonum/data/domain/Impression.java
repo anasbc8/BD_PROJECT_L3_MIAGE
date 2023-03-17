@@ -2,21 +2,14 @@
 package fr.uga.l3miage.photonum.data.domain;
 
 import java.util.Objects;
+import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Impression")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.INTEGER)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "impression_type", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Impression {
 
     @Id
@@ -25,36 +18,15 @@ public abstract class Impression {
 
     @Column(name = "price", nullable = false)
     private double price;
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-    @Column(name = "format", nullable = false)
-    private String format;
-    @Column(name = "quality", nullable = false)
-    private String quality;
 
-    public String quality() {
-        return this.quality;
-    }
+    @ManyToMany
+    private Set<Photo> photoCollection;
 
-    public void setQuality(String quality) {
-        this.quality = quality;
-    }
+    @OneToOne
+    private Article article;
 
-    public String getFormat() {
-        return this.format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
-    public int getQuantity() {
-        return this.quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    @Enumerated
+    private Catalogue reference;
 
     public Long getId() {
         return id;
@@ -70,6 +42,30 @@ public abstract class Impression {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Set<Photo> getPhotoCollection() {
+        return photoCollection;
+    }
+
+    public void setPhotoCollection(Set<Photo> photoCollection) {
+        this.photoCollection = photoCollection;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
+    public Catalogue getReference() {
+        return reference;
+    }
+
+    public void setReference(Catalogue reference) {
+        this.reference = reference;
     }
 
     /*
