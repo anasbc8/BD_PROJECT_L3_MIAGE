@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "Album")
 @DiscriminatorValue("2")
 public class Album extends Impression {
-    @OneToOne
+    @Basic(optional = false)
     private Photo coverPhoto;
     private String title;
     @OneToMany

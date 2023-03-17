@@ -11,13 +11,8 @@ public class Photo extends Image {
     private String retouching;
     @ManyToOne
     private Client owner;
-    @ManyToOne
-    private Page page;
     @ManyToMany(mappedBy = "photoCollection")
     private Set<Impression> impressions;
-
-    @OneToMany
-    private Set<Album> albums;
 
     public Photo() {
 
@@ -39,28 +34,12 @@ public class Photo extends Image {
         this.retouching = retouching;
     }
 
-    public Page getPage() {
-        return page;
-    }
-
-    public void setPage(Page page) {
-        this.page = page;
-    }
-
     public Set<Impression> getImpressions() {
         return impressions;
     }
 
     public void setImpressions(Set<Impression> impressions) {
         this.impressions = impressions;
-    }
-
-    public Set<Album> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(Set<Album> albums) {
-        this.albums = albums;
     }
 
     @Override
