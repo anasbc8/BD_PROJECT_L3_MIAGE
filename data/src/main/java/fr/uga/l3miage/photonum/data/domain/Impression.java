@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 @Table(name = "Impression")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "impression_type", discriminatorType = DiscriminatorType.INTEGER)
-public abstract class Impression {
+public class Impression {
 
     @Id
     @GeneratedValue
