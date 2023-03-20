@@ -27,7 +27,7 @@ public class Commande {
     @Basic(optional = false)
     private Double totalPrice;
 
-    @OneToMany(mappedBy = "commande")
+    @OneToMany
     private Set<Article> articles;
 
     @ManyToOne
