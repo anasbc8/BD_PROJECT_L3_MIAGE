@@ -1,14 +1,22 @@
 package fr.uga.l3miage.photonum.data.domain;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "Article")
+@Getter
+@AllArgsConstructor
+@Setter
+@NoArgsConstructor
 public class Article {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     @Basic(optional = false)
     private int quantity;
     @Basic(optional = false)
@@ -16,29 +24,9 @@ public class Article {
     @OneToOne
     private Impression impression;
 
-    public int getQuantity() {
-        return quantity;
-    }
+    @ManyToOne
+    private Commande commande;
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getPrixTotal() {
-        return prixTotal;
-    }
-
-    public void setPrixTotal(double prixTotal) {
-        this.prixTotal = prixTotal;
-    }
-
-    public Impression getImpression() {
-        return impression;
-    }
-
-    public void setImpression(Impression impression) {
-        this.impression = impression;
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

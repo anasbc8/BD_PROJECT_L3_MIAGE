@@ -1,44 +1,29 @@
 package fr.uga.l3miage.photonum.data.domain;
+
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @DiscriminatorValue("1")
-public class Photo{
-
+public class Photo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String retouching;
     @OneToOne
     private Image image;
 
-    public Photo(String retouching, Image image) {
-        this.retouching = retouching;
-        this.image = image;
-    }
+    @ManyToOne
+    private Tirage tirage;
 
-    public Image getImage() {
-        return this.image;
-    }
+    @ManyToOne
+    private Cadre cadrePhoto;
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
 
-    public String getRetouching() {
-        return retouching;
-    }
-
-    public void setRetouching(String retouching) {
-        this.retouching = retouching;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Photo ph = (Photo) o;
-        return this.image == ph.image && this.retouching == ph.retouching;
-    }
 
 
 }
