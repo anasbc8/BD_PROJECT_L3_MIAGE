@@ -20,6 +20,28 @@ public class Client  {
     @ManyToMany
     private Set<Adress> adresses;
 
+    public Set<Impression> getImpressions() {
+        return impressions;
+    }
+
+    public void setImpressions(Set<Impression> impressions) {
+        this.impressions = impressions;
+    }
+
+    @OneToMany
+    private Set<Impression> impressions ;
+
+    public Set<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(Set<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
+    @OneToMany
+    private Set<Commande> commandes ;
+
     public Long getId() {
         return id;
     }

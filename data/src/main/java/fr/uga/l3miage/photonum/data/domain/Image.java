@@ -15,6 +15,8 @@ public abstract class Image {
     private String metadata;
     private double resolution;
     private boolean isShared;
+    @ManyToOne
+    private Client owner ;
 
     public Image(String path, String metadata, double resolution, boolean isShared) {
         this.path = path;
