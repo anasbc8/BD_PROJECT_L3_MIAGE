@@ -13,10 +13,18 @@ public class Page {
 
     @OneToMany
     private Set<Photo> photos;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     public Page(String text, Set<Photo> photos) {
         this.text = text;
         this.photos = photos;
+    }
+
+    public Page() {
+
+
     }
 
     public String getText() {
@@ -35,4 +43,11 @@ public class Page {
         this.photos = photos;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

@@ -2,8 +2,8 @@
 #  datasource:
 #    url: jdbc:mariadb:// 127.0.0.1:3306/library
 #    hikari:
-#      username: admin
-#      password: changeme
+#      username: benabban
+#      password: d4669fa5cd
 #  jpa:
 #    properties:
 #      hibernate:
