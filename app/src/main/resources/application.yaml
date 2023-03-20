@@ -1,27 +1,12 @@
-#spring:
-#  datasource:
-#    url: jdbc:mariadb:// 127.0.0.1:3306/library
-#    hikari:
-#      username: benabban
-#      password: d4669fa5cd
-#  jpa:
-#    properties:
-#      hibernate:
-#        show_sql: true
-#        hbm2ddl:
-#          auto: update
-#        dialect: org.hibernate.dialect.MariaDBDialect
-#    open-in-view: false
-
 spring:
   datasource:
     url: jdbc:oracle:thin:@im2ag-oracle.univ-grenoble-alpes.fr:1521:im2ag
-    username: essouaik
-    password:
+    username: benabban
+    password: d4669fa5cd
   jpa:
     properties:
       hibernate:
-        show_sql: true
+        show_sql: false
         hbm2ddl:
           auto: update
         dialect: org.hibernate.dialect.Oracle10gDialect

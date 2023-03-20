@@ -9,7 +9,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Calendrier")
 @DiscriminatorValue("1")
 public class Calendrier extends Impression {
 
