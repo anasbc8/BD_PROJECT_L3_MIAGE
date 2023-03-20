@@ -14,17 +14,11 @@ public abstract class Impression {
 
     @Id
     @GeneratedValue
-    private Long id; // remplacer car String si besoin
-
+    private Long id;
     @Column(name = "price", nullable = false)
     private double price;
-
-    @ManyToMany
-    private Set<Photo> photoCollection;
-
     @OneToOne
     private Article article;
-
     @Enumerated
     private Catalogue reference;
 
@@ -44,14 +38,6 @@ public abstract class Impression {
         this.price = price;
     }
 
-    public Set<Photo> getPhotoCollection() {
-        return photoCollection;
-    }
-
-    public void setPhotoCollection(Set<Photo> photoCollection) {
-        this.photoCollection = photoCollection;
-    }
-
     public Article getArticle() {
         return article;
     }
@@ -68,23 +54,16 @@ public abstract class Impression {
         this.reference = reference;
     }
 
-    /*
-     * @Override
-     * public boolean equals(Object o) {
-     * if (this == o)
-     * return true;
-     * if (o == null || getClass() != o.getClass())
-     * return false;
-     * Impression impression = (Impression) o;
-     * return Objects.equals(fullName, author.fullName);
-     * }
-     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Impression that = (Impression) o;
+        return Double.compare(that.price, price) == 0 && Objects.equals(id, that.id) && Objects.equals(article, that.article) && reference == that.reference;
+    }
 
-    /*
-     * @Override
-     * public int hashCode() {
-     * return Objects.hash(fullName);
-     * }
-     */
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, price, article, reference);
+    }
 }

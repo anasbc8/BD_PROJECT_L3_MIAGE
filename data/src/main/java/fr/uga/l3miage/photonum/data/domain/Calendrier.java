@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.DiscriminatorValue;
@@ -23,4 +24,17 @@ public class Calendrier extends Impression {
         this.pages = pages;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Calendrier that = (Calendrier) o;
+        return Objects.equals(pages, that.pages);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), pages);
+    }
 }
