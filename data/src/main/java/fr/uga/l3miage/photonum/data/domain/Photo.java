@@ -1,29 +1,25 @@
 package fr.uga.l3miage.photonum.data.domain;
-
 import jakarta.persistence.*;
-
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @DiscriminatorValue("1")
-public class Photo extends Image {
+public class Photo{
+
     private String retouching;
-    @ManyToOne
-    private Client owner;
-    @ManyToMany(mappedBy = "photoCollection")
-    private Set<Impression> impressions;
+    @OneToOne
+    private Image image;
 
-    public Photo() {
-
+    public Photo(String retouching, Image image) {
+        this.retouching = retouching;
+        this.image = image;
     }
 
-    public Client getOwner() {
-        return this.owner;
+    public Image getImage() {
+        return this.image;
     }
 
-    public void setOwner(Client owner) {
-        this.owner = owner;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public String getRetouching() {
@@ -34,14 +30,6 @@ public class Photo extends Image {
         this.retouching = retouching;
     }
 
-    public Set<Impression> getImpressions() {
-        return impressions;
-    }
-
-    public void setImpressions(Set<Impression> impressions) {
-        this.impressions = impressions;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -49,11 +37,8 @@ public class Photo extends Image {
         if (o == null || getClass() != o.getClass())
             return false;
         Photo ph = (Photo) o;
-        return this.owner == ph.owner && this.retouching == ph.retouching;
+        return this.image == ph.image && this.retouching == ph.retouching;
     }
 
-    @Override
-    public int HashCode() {
-        return Objects.hash(this.owner, this.retouching);
-    }
+
 }
