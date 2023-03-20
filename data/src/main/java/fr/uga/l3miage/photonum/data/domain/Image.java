@@ -3,8 +3,7 @@ package fr.uga.l3miage.photonum.data.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="image_type", discriminatorType = DiscriminatorType.INTEGER)
+@Table(name="Image")
 public abstract class Image {
 
     @Id

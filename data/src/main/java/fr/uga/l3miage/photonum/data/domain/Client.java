@@ -6,38 +6,66 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Client")
-@DiscriminatorValue("1")
-public class Client extends Person {
-
+public class Client  {
+@Id
+@GeneratedValue
+    private Long id ;
     private String email;
+    private String firstName;
+    private String lastName
+
     private String password;
     @OneToMany
     private Set<Photo> ownedImages;
     @ManyToMany
     private Set<Adress> adresses;
 
-    public Set<Photo> getOwnedImages() {
-        return this.ownedImages;
+    public Long getId() {
+        return id;
     }
 
-    public void setOwnedImages(Set<Photo> ownedImages) {
-        this.ownedImages = ownedImages;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Photo> getOwnedImages() {
+        return ownedImages;
+    }
+
+    public void setOwnedImages(Set<Photo> ownedImages) {
+        this.ownedImages = ownedImages;
     }
 
     public Set<Adress> getAdresses() {
@@ -47,5 +75,4 @@ public class Client extends Person {
     public void setAdresses(Set<Adress> adresses) {
         this.adresses = adresses;
     }
-
 }

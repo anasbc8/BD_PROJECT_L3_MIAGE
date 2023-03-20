@@ -12,30 +12,20 @@ public class Adress {
     @GeneratedValue
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "adresses")
-    private Set<Person> habitants;
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Person> getHabitants() {
-        return this.habitants;
-    }
-
-    public void setHabitants(Set<Person> habitants) {
-        this.habitants = habitants;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
