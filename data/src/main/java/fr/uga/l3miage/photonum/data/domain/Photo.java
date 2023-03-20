@@ -8,10 +8,17 @@ public class Photo{
     private String retouching;
     @OneToOne
     private Image image;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     public Photo(String retouching, Image image) {
         this.retouching = retouching;
         this.image = image;
+    }
+
+    public Photo() {
+
     }
 
     public Image getImage() {
@@ -41,4 +48,11 @@ public class Photo{
     }
 
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
