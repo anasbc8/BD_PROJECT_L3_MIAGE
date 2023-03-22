@@ -5,11 +5,11 @@ import fr.uga.l3miage.photonum.data.domain.Impression;
 import jakarta.validation.constraints.NotNull;
 
 public record ImpressionDTO(
-        @NotNull String id,
+/*         @NotNull String id,
         double price,
         @NotNull ArticleDTO article,
         @NotNull Catalogue reference
-) {
+*/) {/*
     public static ImpressionDTO fromEntity(Impression impression) {
         return new ImpressionDTO(
                 impression.getId(),
@@ -26,5 +26,5 @@ public record ImpressionDTO(
         impression.setArticle(article.toEntity());
         impression.setReference(reference);
         return impression;
-    }
+    }*/ 
 }

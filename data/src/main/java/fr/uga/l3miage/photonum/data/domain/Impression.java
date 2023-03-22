@@ -26,5 +26,4 @@ public class Impression {
     @Enumerated
     private Catalogue reference;
 
-
 }

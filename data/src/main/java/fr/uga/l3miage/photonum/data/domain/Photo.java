@@ -22,8 +22,4 @@ public class Photo {
 
     @ManyToOne
     private Cadre cadrePhoto;
-
-
-
-
 }
