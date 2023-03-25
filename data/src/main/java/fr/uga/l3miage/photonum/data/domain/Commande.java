@@ -1,6 +1,5 @@
 package fr.uga.l3miage.photonum.data.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +22,6 @@ public class Commande {
     private String id;
 
     @Basic(optional = false)
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdate;
 
     @Basic(optional = false)

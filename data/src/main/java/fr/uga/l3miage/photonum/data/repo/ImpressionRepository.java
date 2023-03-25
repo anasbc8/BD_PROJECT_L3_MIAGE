@@ -21,19 +21,25 @@ public class ImpressionRepository implements CRUDRepository<Long, Impression> {
 
     @Override
     public Impression get(Long id) {
+
         return entityManager.find(Impression.class, id);
     }
 
 
     @Override
     public void delete(Impression impression) {
+
         entityManager.remove(impression);
     }
 
 
     @Override
     public List<Impression> all() {
-        return null;
+        //obtenir les references des impressions et leur prix  triés par reference
+        String query = "select reference,price  FROM Impression order by reference";
+
+        // retourne la liste des impressions
+        return entityManager.createQuery(query, Impression.class).getResultList();
     }
 
 }
