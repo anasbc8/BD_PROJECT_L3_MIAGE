@@ -10,13 +10,13 @@ import java.util.List;
 
 @Repository
 public class ImageRepository implements CRUDRepository<String, Image> {
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Autowired
     public ImageRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public Image save(Image image) {
