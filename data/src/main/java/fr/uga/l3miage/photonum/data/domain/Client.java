@@ -23,7 +23,7 @@ public class Client {
 
     private String password;
     @OneToMany
-    private Set<Photo> ownedImages;
+    private Set<Image> ownedImages;
     @ManyToMany
     private Set<Adress> adresses;
 
@@ -31,5 +31,9 @@ public class Client {
     private Set<Impression> impressions;
     @OneToMany(mappedBy = "client")
     private Set<Commande> commandes;
+
+    public void addImage(Image image) {
+        ownedImages.add(image);
+    }
 
 }
