@@ -12,6 +12,5 @@ public class PhotoNumApplication {
     public static void main(String[] args) {
         SpringApplication.run(PhotoNumApplication.class, args);
     }
-    //Impression imp = ImpressionRepository.save(new Impression("20",30,null,null));
 
 }
