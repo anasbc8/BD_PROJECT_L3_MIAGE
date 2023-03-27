@@ -12,27 +12,28 @@ import java.util.Collection;
 @Transactional
 public class ImpressionServiceImpl implements ImpressionService {
 
-    private final ImpressionRepository authorRepository;
+
+    private ImpressionRepository impressionRepository;
 
     @Autowired
     public ImpressionServiceImpl(ImpressionRepository authorRepository) {
-        this.authorRepository = authorRepository;
+        this.impressionRepository = authorRepository;
     }
 
 
     @Override
     public Impression save(Impression impression) {
-        return null;
+        return impressionRepository.save(impression);
     }
 
     @Override
     public Impression get(Long id) throws EntityNotFoundException {
-        return null;
+        return impressionRepository.get(id);
     }
 
     @Override
     public Collection<Impression> list() {
-        return null;
+        return impressionRepository.all();
     }
 
     @Override
