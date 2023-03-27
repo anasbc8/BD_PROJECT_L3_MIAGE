@@ -64,6 +64,13 @@ public class ImageRepository implements CRUDRepository<String, Image> {
                 .executeUpdate();
     }
 
+    public List<Image> findImageByPath(Long clientId, String imagePath) {
+        String query = "Select i FROM Image i WHERE i.path = :imagePath";
+        return entityManager.createQuery(query)
+                .setParameter("clientId", clientId)
+                .setParameter("imagePath", imagePath)
+                .getResultList();
+    }
     public List<Image> findImageByOwnerAndPath(Long clientId, String imagePath) {
         String query = "Select i FROM Image i WHERE i.owner.id = :clientId AND i.path = :imagePath";
         return entityManager.createQuery(query)
