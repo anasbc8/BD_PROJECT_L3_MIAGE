@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
-public abstract class Image {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
