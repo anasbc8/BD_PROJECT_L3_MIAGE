@@ -1,8 +1,6 @@
 
 package fr.uga.l3miage.photonum.data.domain;
 
-import java.util.Objects;
-import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.*;
