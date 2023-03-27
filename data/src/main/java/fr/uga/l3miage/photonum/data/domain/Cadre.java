@@ -4,15 +4,21 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "Cadre")
 @DiscriminatorValue("4")
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cadre extends Impression {
 
-    @OneToMany
+    @OneToMany(mappedBy = "cadrePhoto")
     private Set<Photo> photos;
 
 
