@@ -14,6 +14,5 @@ public class PhotoNumApplication {
         SpringApplication.run(PhotoNumApplication.class, args);
         System.out.println("anas zuin ");
     }
-    //Impression imp = ImpressionRepository.save(new Impression("20",30,null,null));
 
 }
