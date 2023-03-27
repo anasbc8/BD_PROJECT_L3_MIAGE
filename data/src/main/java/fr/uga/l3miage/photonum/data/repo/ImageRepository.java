@@ -72,6 +72,13 @@ public class ImageRepository implements CRUDRepository<String, Image> {
                 .getResultList();
     }
 
+    //récupérer la liste des images partagées
+    public List<Image> getSharedImages() {
+        String query = "SELECT i FROM Image i WHERE i.isShared = true";
+        return entityManager.createQuery(query, Image.class).getResultList();
+    }
+
+
 
 
 
