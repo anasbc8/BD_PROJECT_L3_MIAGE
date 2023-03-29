@@ -1,16 +1,15 @@
 package fr.uga.l3miage.photonum.data.repo;
 
-import fr.uga.l3miage.photonum.data.domain.Impression;
+import fr.uga.l3miage.photonum.data.domain.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
-public class ImpressionRepository implements CRUDRepository<String, Impression> {
+public class ImpressionRepository implements CRUDRepository<Long, Impression> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -22,25 +21,26 @@ public class ImpressionRepository implements CRUDRepository<String, Impression> 
     }
 
     @Override
-    public Impression get(String id) {
+    public Impression get(Long id) {
+
         return entityManager.find(Impression.class, id);
     }
 
-
     @Override
     public void delete(Impression impression) {
+
         entityManager.remove(impression);
     }
 
+
     @Override
     public List<Impression> all() {
-        TypedQuery<Impression> query = entityManager.createQuery("SELECT i FROM Impression i", Impression.class);
-        return query.getResultList();
+        //obtenir les references des impressions et leur prix  triés par reference
+        String query = "select reference,price  FROM Impression order by reference";
+
+        // retourne la liste des impressions
+        return entityManager.createQuery(query, Impression.class).getResultList();
     }
 
-
-
     
-
-
 }

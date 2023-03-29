@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-class ImpressionRepositoryTest extends Base {
+class ImageRepositoryTest extends Base {
 
     @Autowired
-    ImpressionRepository impressionRepository;
+    ImageRepositoryTest imageRepository ;
 
     @Test
-    void all(){
+    void all() {
 
     }
 

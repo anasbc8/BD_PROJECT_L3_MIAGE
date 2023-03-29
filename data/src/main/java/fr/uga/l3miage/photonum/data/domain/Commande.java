@@ -22,16 +22,25 @@ public class Commande {
     private String id;
 
     @Basic(optional = false)
-    private Date createdAt;
+    private Date createdate;
 
     @Basic(optional = false)
     private Double totalPrice;
 
-    @OneToMany(mappedBy = "commande")
+    private String status;
+
+    @OneToMany
     private Set<Article> articles;
 
     @ManyToOne
     private Client client;
 
+    public void setStatus(boolean stat){
+        if(stat){
+            this.status = "en cours";
+        }else{
+            this.status = "expédiée";
+        }
+    }
 
 }
