@@ -164,7 +164,7 @@ class ImageRepositoryTest extends Base {
         imageRepository.save(image4);
 
         List<Image> sharedImages = imageRepository.getSharedImages();
-        
+
         assertThat(sharedImages).containsExactly(image1, image2, image4);
     }
 
