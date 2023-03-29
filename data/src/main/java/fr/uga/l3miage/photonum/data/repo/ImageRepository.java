@@ -41,7 +41,7 @@ public class ImageRepository implements CRUDRepository<String, Image> {
     }
 
     //supprimer une image avec l'owner id et son path
-    public void deleteImageByOwnerAndPath(Long clientId, String imagePath) {
+    public void deleteImageByOwnerAndPath(String clientId, String imagePath) {
         // create and execute the JPQL delete query
         String query = "DELETE FROM Image i WHERE i.owner.id = :clientId AND i.path = :imagePath";
         entityManager.createQuery(query)
@@ -64,14 +64,14 @@ public class ImageRepository implements CRUDRepository<String, Image> {
                 .executeUpdate();
     }
 
-    public List<Image> findImageByPath(Long clientId, String imagePath) {
+    public List<Image> findImageByPath(String clientId, String imagePath) {
         String query = "Select i FROM Image i WHERE i.path = :imagePath";
         return entityManager.createQuery(query)
                 .setParameter("clientId", clientId)
                 .setParameter("imagePath", imagePath)
                 .getResultList();
     }
-    public List<Image> findImageByOwnerAndPath(Long clientId, String imagePath) {
+    public List<Image> findImageByOwnerAndPath(String clientId, String imagePath) {
         String query = "Select i FROM Image i WHERE i.owner.id = :clientId AND i.path = :imagePath";
         return entityManager.createQuery(query)
                 .setParameter("clientId", clientId)
