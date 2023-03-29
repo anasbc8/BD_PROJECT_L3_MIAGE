@@ -30,7 +30,6 @@ public class CommandeRepositoy implements CRUDRepository<String, Commande> {
     }
 
     @Override
-    //Récuperer tous les commandes
     public List<Commande> all() {
         String query = "select client,totalPrice,createdate FROM Commande " ;
         return entityManager.createQuery(query, Commande.class).getResultList();

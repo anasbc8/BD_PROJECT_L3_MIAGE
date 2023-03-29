@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import fr.uga.l3miage.photonum.data.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +28,8 @@ public class Commande {
     @Basic(optional = false)
     private Double totalPrice;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @OneToMany
     private Set<Article> articles;
@@ -35,12 +37,5 @@ public class Commande {
     @ManyToOne
     private Client client;
 
-    public void setStatus(boolean stat){
-        if(stat){
-            this.status = "en cours";
-        }else{
-            this.status = "expédiée";
-        }
-    }
 
 }

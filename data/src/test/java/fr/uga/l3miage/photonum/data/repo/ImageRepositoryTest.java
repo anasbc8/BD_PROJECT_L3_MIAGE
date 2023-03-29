@@ -1,78 +1,50 @@
 package fr.uga.l3miage.photonum.data.repo;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import jakarta.persistence.EntityManager;
+import fr.uga.l3miage.photonum.data.domain.Client;
+import fr.uga.l3miage.photonum.data.domain.Image;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import fr.uga.l3miage.photonum.data.domain.Adress;
-import fr.uga.l3miage.photonum.data.domain.Client;
-import fr.uga.l3miage.photonum.data.domain.Commande;
-import fr.uga.l3miage.photonum.data.domain.Image;
+import java.util.List;
 
-@DataJpaTest
+import static fr.uga.l3miage.photonum.data.repo.Utils.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 class ImageRepositoryTest extends Base {
 
     @Autowired
-    EntityManager entityManager;
-    @Autowired
     private ImageRepository imageRepository;
 
-    Client createClient(){
+    Client createClient() {
         Client owner = new Client();
         owner.setLastName("Doe");
         owner.setFirstName("John");
         owner.setEmail("johndoe@example.com");
         owner.setPassword("secret");
-
         return owner;
     }
 
-    Image createImage(String path,String metadata,double resolution, boolean shared, Client owner){
-        Image image = new Image();
-        image.setPath(path);
-        image.setMetadata(metadata);
-        image.setResolution(resolution);
-        image.setShared(shared);
-        image.setOwner(owner);
-
-        return image;
+    Image buildImage(String path, String metadata, double resolution, boolean shared, Client owner) {
+        return Image.builder()
+                .path(path)
+                .metadata(metadata)
+                .resolution(resolution)
+                .isShared(shared)
+                .owner(owner != null ? owner : null)
+                .build();
     }
+
     @Test
     void findAllTest() {
-        Client owner = createClient();
 
-        Adress adresse = new Adress();
-        adresse.setName("Grenoble");
+        Image image1 = buildImage("path/to/image1.jpg", "metadata for image1", 350.0, true, null);
+        Image image2 = buildImage("path/to/image2.jpg", "metadata for image2", 150.0, true, null);
 
-        Set<Adress> adresses = new HashSet<>();
-        adresses.add(adresse);
-        owner.setAdresses(adresses);
-
-        Image image1 = createImage("path/to/image1.jpg","metadata for image1",350.0,true,owner);
-        Image image2 = createImage("path/to/image2.jpg","metadata for image2",150.0,true,owner);
-
-        entityManager.persist(owner);
         entityManager.persist(image1);
         entityManager.persist(image2);
         entityManager.flush();
-
-        Commande commande = new Commande();
-        commande.setClient(owner);
-        commande.setStatus(true);
-        commande.setCreatedate(new Date());
-        commande.setTotalPrice(100.0);
-
         List<Image> allImages = imageRepository.all();
-
-        assertThat(allImages).containsExactly(image1, image2);
+        assertThat(allImages.stream().map(Image::getPath)).containsExactly(image1.getPath(), image2.getPath());
     }
 
     @Test
@@ -81,7 +53,8 @@ class ImageRepositoryTest extends Base {
         Client owner = createClient();
         entityManager.persist(owner);
 
-        Image image = createImage("path/to/image1.jpg","metadata for image1",350.0,true,owner);
+        Image image = buildImage("path/to/image1.jpg", "metadata for image1", 350.0, true, owner);
+        entityManager.persist(image);
 
         imageRepository.deleteImageByOwnerAndPath(owner.getId(), image.getPath());
 
@@ -93,52 +66,49 @@ class ImageRepositoryTest extends Base {
     void updateImageTest() {
         Client owner = createClient();
 
-        Image image = createImage("path/to/image1.jpg","metadata for image1",350.0,false,owner);
+        Image image = buildImage("path/to/image1.jpg", "metadata for image1", 350.0, false, owner);
 
         entityManager.persist(owner);
         entityManager.persist(image);
         entityManager.flush();
-        
+
         String newMetadata = "metadata jdida";
-        String newResolution = "600.0";
+        double newResolution = 600.0;
         boolean isShared = true;
-        imageRepository.updateImage(owner.getId(), image.getPath(), newMetadata, newResolution, isShared);
+        imageRepository.updateImage(owner.getId(), image.getId(), newMetadata, newResolution, isShared);
         entityManager.flush();
-        
         Image updatedImage = entityManager.find(Image.class, image.getId());
         assertThat(updatedImage.getMetadata()).isEqualTo(newMetadata);
-        assertThat(updatedImage.getResolution()).isEqualTo(Double.parseDouble(newResolution));
+        assertThat(updatedImage.getResolution()).isEqualTo(newResolution);
         assertThat(updatedImage.isShared()).isEqualTo(isShared);
     }
 
     @Test
     void findImageByPathTest() {
         // Given
-        Client owner = createClient();
-        entityManager.persist(owner);
         entityManager.flush();
 
         String imagePath = "path/to/image.jpg";
-        Image image = createImage(imagePath, "metadata", 300.0, true, owner);
+        Image image = buildImage(imagePath, "metadata", 300.0, true, null);
         entityManager.persist(image);
         entityManager.flush();
 
         // When
-        List<Image> foundImages = imageRepository.findImageByPath(owner.getId(), imagePath);
+        List<Image> foundImages = imageRepository.findImageByPath(imagePath);
 
         // Then
         assertThat(foundImages).containsExactly(image);
     }
 
     @Test
-    void FindImageByOwnerAndPathTest() {
+    void findImageByOwnerAndPathTest() {
 
         Client owner = createClient();
         entityManager.persist(owner);
         entityManager.flush();
 
-        Image image1 = createImage("path/to/image1.jpg", "metadata1", 300.0, false, owner);
-        Image image2 = createImage("path/to/image2.jpg", "metadata2", 150.0, true, owner);
+        Image image1 = buildImage("path/to/image1.jpg", "metadata1", 300.0, false, owner);
+        Image image2 = buildImage("path/to/image2.jpg", "metadata2", 150.0, true, owner);
         entityManager.persist(image1);
         entityManager.persist(image2);
         entityManager.flush();
@@ -152,11 +122,13 @@ class ImageRepositoryTest extends Base {
     void getSharedImagesTest() {
         Client owner1 = createClient();
         Client owner2 = createClient();
+        entityManager.persist(owner1);
+        entityManager.persist(owner2);
 
-        Image image1 = createImage("path/to/image1.jpg", "Some metadata for image1", 300.0, true, owner1);
-        Image image2 = createImage("path/to/image2.jpg", "Some metadata for image2", 150.0, true, owner1);
-        Image image3 = createImage("path/to/image3.jpg", "Some metadata for image3", 200.0, false, owner1);
-        Image image4 = createImage("path/to/image4.jpg", "Some metadata for image4", 100.0, true, owner2);
+        Image image1 = buildImage(IMAGE_1_PATH, "Some metadata for image1", 300.0, true, owner1);
+        Image image2 = buildImage(IMAGE_2_PATH, "Some metadata for image2", 150.0, true, owner1);
+        Image image3 = buildImage(IMAGE_3_PATH, "Some metadata for image3", 200.0, false, owner1);
+        Image image4 = buildImage(IMAGE_4_PATH, "Some metadata for image4", 100.0, true, owner2);
 
         imageRepository.save(image1);
         imageRepository.save(image2);
@@ -167,9 +139,6 @@ class ImageRepositoryTest extends Base {
 
         assertThat(sharedImages).containsExactly(image1, image2, image4);
     }
-
-
-
 
 
 }

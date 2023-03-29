@@ -1,13 +1,12 @@
 package fr.uga.l3miage.photonum.data.repo;
 
-import fr.uga.l3miage.photonum.data.domain.Commande;
-import fr.uga.l3miage.photonum.data.domain.Image;
+import fr.uga.l3miage.photonum.data.domain.Client;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
 
-public class Client implements CRUDRepository<String, Client> {
+public class ClientRepository implements CRUDRepository<String, Client> {
     @PersistenceContext
     private EntityManager entityManager;
     @Override

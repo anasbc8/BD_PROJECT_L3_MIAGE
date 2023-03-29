@@ -40,18 +40,20 @@ public class AlbumServiceImpl implements AlbumService {
     public List<Album> list() {
         return albumRepository.all();
     }
-        @Override
-        public void delete(String id) throws EntityNotFoundException {
-        Album imp = get(id);
-            if(imp==null){
-                throw new EntityNotFoundException("impression  with id=%d not found".formatted(id));
-            }else {
-                albumRepository.delete(imp);
-            }
 
-}
+    @Override
+    public void delete(String id) throws EntityNotFoundException {
+        Album imp = get(id);
+        if (imp == null) {
+            throw new EntityNotFoundException("album  with id=%d not found".formatted(id));
+        } else {
+            albumRepository.delete(imp);
+        }
+
+    }
+
     @Override
     public Album update(Album album) throws EntityNotFoundException {
-            return albumRepository.save(album) ;
+        return albumRepository.save(album);
     }
 }

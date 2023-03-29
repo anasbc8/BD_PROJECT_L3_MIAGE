@@ -51,23 +51,17 @@ public class ImageRepository implements CRUDRepository<String, Image> {
     }
 
 
-    public void updateImage(String clientId, String imagePath, String newMetadata, String newResolution, boolean isShared) {
-        String query = "UPDATE Image i SET i.metadata = :newMetadata, i.resolution = :newResolution" +
-                        ", i.isShared = :isShared WHERE i.owner.id = :clientId AND i.path = :imagePath";
-
-        entityManager.createQuery(query)
-                .setParameter("newMetadata", newMetadata)
-                .setParameter("isShared", isShared)
-                .setParameter("newResolution", newResolution)
-                .setParameter("clientId", clientId)
-                .setParameter("imagePath", imagePath)
-                .executeUpdate();
+    public void updateImage(String clientId, String imageId, String newMetadata, double newResolution, boolean isShared) {
+        Image imageToUpdate = entityManager.find(Image.class, imageId);
+        imageToUpdate.setMetadata(newMetadata);
+        imageToUpdate.setResolution(newResolution);
+        imageToUpdate.setShared(isShared);
+        entityManager.persist(imageToUpdate);
     }
 
-    public List<Image> findImageByPath(String clientId, String imagePath) {
+    public List<Image> findImageByPath(String imagePath) {
         String query = "Select i FROM Image i WHERE i.path = :imagePath";
         return entityManager.createQuery(query)
-                .setParameter("clientId", clientId)
                 .setParameter("imagePath", imagePath)
                 .getResultList();
     }
