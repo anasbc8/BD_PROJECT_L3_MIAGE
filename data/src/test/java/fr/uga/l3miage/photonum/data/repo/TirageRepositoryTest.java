@@ -1,7 +1,6 @@
 package fr.uga.l3miage.photonum.data.repo;
 
 import fr.uga.l3miage.photonum.data.domain.*;
-import jakarta.persistence.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 
-
-import static fr.uga.l3miage.photonum.data.repo.Utils.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TirageRepositoryTest extends Base {
 
@@ -38,7 +34,7 @@ public class TirageRepositoryTest extends Base {
     @Test
     void updateTirageTest(){
         Tirage tirageTest = new Tirage();
-        Set<Photo> photos = new HashSet<Photo>();
+        Set<Photo> photos = new HashSet<>();
         Photo ph1 = new Photo();
         Photo ph2 = new Photo();
         ph1.setRetouching("khayat");
@@ -52,7 +48,7 @@ public class TirageRepositoryTest extends Base {
         }
         entityManager.flush();
 
-        Set<Photo> photosMaj = new HashSet<Photo>();
+        Set<Photo> photosMaj = new HashSet<>();
         Photo ph3 = new Photo();
         Photo ph4 = new Photo();
         ph3.setRetouching("khadar");
@@ -76,7 +72,7 @@ public class TirageRepositoryTest extends Base {
     void deleteTirageTest(){
 
         Tirage tirageTest = new Tirage();
-        Set<Photo> photos = new HashSet<Photo>();
+        Set<Photo> photos = new HashSet<>();
         Photo ph1 = new Photo();
         Photo ph2 = new Photo();
         ph1.setRetouching("khayat");
@@ -94,14 +90,14 @@ public class TirageRepositoryTest extends Base {
         entityManager.flush();
 
         Tirage tirageMaj = tirageRepository.get(tirageTest.getId());
-        assertTrue(tirageMaj == null);
+        assertNull(tirageMaj);
 
     }
 
     @Test
     void saveTirageTest(){
         Tirage tirageTest = new Tirage();
-        Set<Photo> photos = new HashSet<Photo>();
+        Set<Photo> photos = new HashSet<>();
         Photo ph1 = new Photo();
         Photo ph2 = new Photo();
         ph1.setRetouching("khayat");
@@ -122,7 +118,7 @@ public class TirageRepositoryTest extends Base {
     @Test
     void getTirageTest(){
         Tirage tirageTest = new Tirage();
-        Set<Photo> photos = new HashSet<Photo>();
+        Set<Photo> photos = new HashSet<>();
         Photo ph1 = new Photo();
         Photo ph2 = new Photo();
         ph1.setRetouching("khayat");
