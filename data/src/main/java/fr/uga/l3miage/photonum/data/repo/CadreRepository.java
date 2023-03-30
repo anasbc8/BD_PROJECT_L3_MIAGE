@@ -26,6 +26,7 @@ public class CadreRepository implements CRUDRepository<String,Cadre> {
 
     @Override
     public Cadre get(String id) {
+
         return entityManager.find(Cadre.class, id);
     }
 
@@ -36,6 +37,7 @@ public class CadreRepository implements CRUDRepository<String,Cadre> {
 
     @Override
     public List<Cadre> all() {
+
         return entityManager.createQuery("from Cadre", Cadre.class).getResultList();
     }
 }

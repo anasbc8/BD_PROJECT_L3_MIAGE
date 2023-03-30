@@ -1,6 +1,7 @@
 package fr.uga.l3miage.photonum.data.repo;
 
 import fr.uga.l3miage.photonum.data.domain.Calendrier;
+import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -30,15 +31,14 @@ public class CalendrierRepository implements CRUDRepository<String, Calendrier> 
 
     @Override
     public void delete(Calendrier cal) {
+
         entityManager.remove(cal);
     }
 
-    public void update(Set<Page> pages  ) {
-        String query = "UPDATE Calendrier i SET i.pages=:pages ";
-        entityManager.createQuery(query).
-                setParameter("pages", pages).
-                executeUpdate();
-
+    public void updateCalendrier(String calendrierId ,Set<Page> pages ) {
+        Calendrier calendrierToUpdate = entityManager.find(Calendrier.class,calendrierId );
+        calendrierToUpdate.setPages(pages);
+        entityManager.persist(calendrierToUpdate);
     }
 
     @Override
@@ -46,6 +46,12 @@ public class CalendrierRepository implements CRUDRepository<String, Calendrier> 
         String query = "SELECT a FROM Calendrier a";
         return entityManager.createQuery(query, Calendrier.class).getResultList();
     }
-
+    public void deleteCalendrierById(String calendrierID) {
+        // create and execute the JPQL delete query
+        String query = "DELETE FROM Calendrier i WHERE i.id = :calendrierID ";
+        entityManager.createQuery(query)
+                .setParameter("calendrierID", calendrierID)
+                .executeUpdate();
+    }
 
 }

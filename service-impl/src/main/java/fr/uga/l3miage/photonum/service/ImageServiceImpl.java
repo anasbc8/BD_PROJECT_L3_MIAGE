@@ -51,7 +51,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image findByPath(String path) throws EntityNotFoundException{
-        return null;
+        return (Image) imageRepository.findImageByPath(path);
     }
 
     @Override
