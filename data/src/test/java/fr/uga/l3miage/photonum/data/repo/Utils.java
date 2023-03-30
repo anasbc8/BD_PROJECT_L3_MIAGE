@@ -7,7 +7,7 @@ public class Utils {
     }
 
     public static String IMAGE_1_PATH = "path/to/image1.jpg";
-    public static String IMAGE_2_PATH = "path/to/image1.jpg";
-    public static String IMAGE_3_PATH = "path/to/image1.jpg";
-    public static String IMAGE_4_PATH = "path/to/image1.jpg";
+    public static String IMAGE_2_PATH = "path/to/image2.jpg";
+    public static String IMAGE_3_PATH = "path/to/image3.jpg";
+    public static String IMAGE_4_PATH = "path/to/image4.jpg";
 }
