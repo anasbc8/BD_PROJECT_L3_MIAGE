@@ -1,6 +1,7 @@
 package fr.uga.l3miage.photonum.data.repo;
 
 import fr.uga.l3miage.photonum.data.domain.Album;
+import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import jakarta.persistence.EntityManager;
@@ -35,13 +36,12 @@ public class AlbumRepository implements CRUDRepository<String, Album> {
         entityManager.remove(album);
     }
 
-    public void update(String title, Photo photoCover, Set<Page> pages ) {
-        String query = "UPDATE Album i SET i.title = :title, i.photoCover = :photoCover" + ", i.pages=:pages ";
-         entityManager.createQuery(query).
-                setParameter("title", title).
-                setParameter("photoCover", photoCover).
-                setParameter("pages", pages).
-                executeUpdate();
+    public void update(String albumId,String title, Photo photoCover, Set<Page> pages ) {
+        Album albumToUpdate = entityManager.find(Album.class,albumId );
+        albumToUpdate.setPages(pages);
+        albumToUpdate.setTitle(title);
+        albumToUpdate.setPhotoCover(photoCover);
+        entityManager.persist(albumToUpdate);
 
     }
 
