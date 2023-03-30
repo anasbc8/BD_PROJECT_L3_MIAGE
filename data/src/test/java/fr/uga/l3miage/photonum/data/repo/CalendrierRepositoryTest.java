@@ -54,14 +54,13 @@ public class CalendrierRepositoryTest extends Base{
     page4.setText("Page 4");
     nouvellesPages.add(page3);
     nouvellesPages.add(page4);
-    calendrier.setPages(nouvellesPages);
-    entityManager.persist(calendrier);
+
     for(Page pages3 :nouvellesPages){
         entityManager.persist(pages3);
     }
     entityManager.flush();
 
-    calendrierRepository.updateCalendrier(calendrier.getId(),calendrier.getPages());
+    calendrierRepository.updateCalendrier(calendrier.getId(),nouvellesPages);
 
     // Vérifier que les pages ont été correctement mises à jour dans la base de données
     List<Calendrier> calendriers = calendrierRepository.all();
@@ -84,5 +83,13 @@ public class CalendrierRepositoryTest extends Base{
         List<Calendrier> calendriers = calendrierRepository.all();
         assertThat(calendriers).isEmpty();
 
+    }
+    @Test
+    void getCalendrierByIdTest(){
+    Calendrier calendrier1 = new Calendrier();
+    entityManager.persist(calendrier1);
+    entityManager.flush();
+    List<Calendrier> allcalendriers = calendrierRepository.getCalendrierById(calendrier1.getId());
+        assertThat(allcalendriers.stream().map(Calendrier::getId)).containsExactly(calendrier1.getId());
     }
 }

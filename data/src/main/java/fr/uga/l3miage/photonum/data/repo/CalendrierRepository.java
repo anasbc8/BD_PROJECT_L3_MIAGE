@@ -1,6 +1,7 @@
 package fr.uga.l3miage.photonum.data.repo;
 
 import fr.uga.l3miage.photonum.data.domain.Calendrier;
+import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import jakarta.persistence.EntityManager;
@@ -52,6 +53,13 @@ public class CalendrierRepository implements CRUDRepository<String, Calendrier> 
         entityManager.createQuery(query)
                 .setParameter("calendrierID", calendrierID)
                 .executeUpdate();
+    }
+
+    public List<Calendrier> getCalendrierById(String calendrierId){
+        String query="Select a from Calendrier a where a.id =: calendrierId" ;
+        return entityManager.createQuery(query)
+                .setParameter("calendrierId", calendrierId)
+                .getResultList();
     }
 
 }
