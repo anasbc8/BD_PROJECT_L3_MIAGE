@@ -1,12 +1,15 @@
 package fr.uga.l3miage.photonum.data.repo;
 
 import fr.uga.l3miage.photonum.data.domain.Cadre;
+import fr.uga.l3miage.photonum.data.domain.Page;
+import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.domain.Tirage;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class CadreRepository implements CRUDRepository<String,Cadre> {
@@ -35,6 +38,11 @@ public class CadreRepository implements CRUDRepository<String,Cadre> {
         entityManager.remove(entity);
     }
 
+    public void update(String cadreId, Set<Photo> photos  ) {
+        Cadre cadreToUpdate = entityManager.find(Cadre.class , cadreId);
+        cadreToUpdate.setPhotos(photos);
+        entityManager.persist(cadreToUpdate);
+    }
     @Override
     public List<Cadre> all() {
 

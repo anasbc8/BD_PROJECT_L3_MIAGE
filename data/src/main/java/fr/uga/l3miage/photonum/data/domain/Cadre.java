@@ -12,7 +12,8 @@ import java.util.Set;
 
 @Entity
 @DiscriminatorValue("4")
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cadre extends Impression {
