@@ -18,7 +18,7 @@ public class CadreRepositoryTest extends Base {
     private CadreRepository cadreRepository;
 
     @Test
-    void allTest(){
+    void allCadreTest(){
         Cadre cadre1 = new Cadre();
         Impression cadre2 = new Cadre();
         Impression cadre3 = new Cadre();

@@ -19,7 +19,7 @@ public class CalendrierRepositoryTest extends Base{
     CalendrierRepository calendrierRepository ;
 
     @Test
-    void findAllTest(){
+    void findAllCalendriersTest(){
 
     Calendrier calendrier1 = new Calendrier() ;
     Calendrier calendrier2 = new Calendrier() ;
@@ -30,7 +30,7 @@ public class CalendrierRepositoryTest extends Base{
         assertThat(cal.stream().map(Calendrier::getId)).containsExactly(calendrier1.getId(), calendrier2.getId());
     }
 @Test
-    void updateTest(){
+    void updateCalendrierTest(){
 
         Calendrier calendrier = new Calendrier();
         Set<Page> pages = new HashSet<>();
@@ -75,7 +75,7 @@ public class CalendrierRepositoryTest extends Base{
     }
 
     @Test
-    void deleteCalendrier(){
+    void deleteCalendrierById(){
         Calendrier calendrier1= new Calendrier();
         entityManager.persist(calendrier1);
 
