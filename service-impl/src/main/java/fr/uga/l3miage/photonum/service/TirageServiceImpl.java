@@ -1,12 +1,14 @@
 package fr.uga.l3miage.photonum.service;
 
 import fr.uga.l3miage.photonum.data.domain.Tirage;
+import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.repo.TirageRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -38,4 +40,16 @@ public class TirageServiceImpl implements TirageService {
     public Tirage update(Tirage tirage){
         return tirageRepository.save(tirage);
     }
+
+    @Override
+    public void delete(String id){
+        tirageRepository.delete(tirageRepository.get(id));
+    }
+
+    @Override
+    public List<Photo> getPhotosByTirageId(String tirageId) {
+        return tirageRepository.getPhotosByTirageId(tirageId);
+    }
+
+    
 }
