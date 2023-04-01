@@ -45,13 +45,12 @@ public class ImageController {
     }
 
     @PostMapping("/addImage/{id}")
-    public ImageDTO createImage(@PathVariable("id") @NotNull String ownerId, @Valid @RequestBody ImageDTO imageDTO) throws EntityNotFoundException {
-        Image image = imageMapper.dtoToEntity(imageDTO);
+    public ImageDTO createImage(@PathVariable("id") @NotNull String ownerId,@RequestBody ImageDTO imageDTO) throws EntityNotFoundException {
         Client owner = clientService.get(ownerId); // Récupération du propriétaire de l'image
         if (owner == null) throw new EntityNotFoundException("client not found with id " + ownerId);
+        Image image = imageMapper.dtoToEntity(imageDTO);
         Image savedImage = imageService.save(owner, image);
-        ImageDTO savedImageDTO = imageMapper.entityToDTO(savedImage);
-        return savedImageDTO;
+        return imageMapper.entityToDTO(savedImage);
     }
 
  /*   @PutMapping("/updateImage/{clientId}/{imageId}")
@@ -76,12 +75,10 @@ public class ImageController {
                                               @PathVariable("imageId") @NotNull String imageId) throws EntityNotFoundException {
         Client owner = clientService.get(clientId);
         Image imageToDelete = imageService.get(imageId);
-        if (imageToDelete == null) {
+        if (imageToDelete == null || owner == null) {
             return ResponseEntity.notFound().build();
         }
-        if (!owner.getId().equals(clientId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+
         imageService.delete(imageId);
         return ResponseEntity.ok("Image deleted successfully.");
     }
