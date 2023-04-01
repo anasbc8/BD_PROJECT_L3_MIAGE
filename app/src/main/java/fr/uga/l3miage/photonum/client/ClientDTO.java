@@ -11,25 +11,16 @@ import jakarta.validation.constraints.Null;
 import java.util.Collection;
 
 public record ClientDTO(
-        @NotBlank
-        String id,
-        @NotBlank
-        String email,
-        @NotBlank
-        String firstName,
-        @NotBlank
-        String lastName,
-        @NotBlank
-        String password,
+                @NotBlank String id,
+                @NotBlank String email,
+                @NotBlank String firstName,
+                @NotBlank String lastName,
+                @NotBlank String password,
 
-        @Null
-        Collection<ImageDTO> ownedImages
-        @NotNull
-        Collection<AdressDTO> adresses
-        @Null
-        Collection<ImpressionDTO> impressions
-        @Null
-        Collection<CommandeDTO> commandes
+                @Null Collection<ImageDTO> ownedImages,
+                @NotNull Collection<AdressDTO> adresses,
+                @Null Collection<ImpressionDTO> impressions,
+                @Null Collection<CommandeDTO> commandes
 
 ) {
 }
