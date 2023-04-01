@@ -11,5 +11,5 @@ public interface ArticleService extends BaseService<Article, String> {
      List<Article> list() ;
      void delete(String id) throws EntityNotFoundException;
      Article get(String id) throws EntityNotFoundException;
-     Article update(Article article) throws EntityNotFoundException;
+      Article update(Article article) throws EntityNotFoundException;
 }

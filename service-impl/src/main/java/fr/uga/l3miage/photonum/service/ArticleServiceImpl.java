@@ -1,7 +1,6 @@
 package fr.uga.l3miage.photonum.service;
 
 import fr.uga.l3miage.photonum.data.domain.Article;
-import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.data.repo.ArticleRepository;
 import org.slf4j.Logger;
 import jakarta.transaction.Transactional;
@@ -52,7 +51,8 @@ private ArticleRepository articleRepository ;
 
     @Override
     public Article update(Article article) throws EntityNotFoundException {
-        return articleRepository.save(article);
+         articleRepository.update(article);
+        return article;
     }
 
 }
