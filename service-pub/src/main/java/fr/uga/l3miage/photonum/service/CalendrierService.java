@@ -10,4 +10,6 @@ public interface CalendrierService extends BaseService<Calendrier , String> {
      Calendrier save(Calendrier calendrier);
      void delete(String id) throws EntityNotFoundException ;
      Calendrier update(Calendrier calendrier) throws EntityNotFoundException;
+     public Calendrier get(String id)  throws EntityNotFoundException;
+
 }

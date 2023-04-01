@@ -45,15 +45,16 @@ public class ImageController {
     }
 
     @PostMapping("/addImage/{id}")
-    public ImageDTO createImage(@PathVariable("id") @NotNull String ownerId, @Valid @RequestBody ImageDTO imageDTO) {
+    public ImageDTO createImage(@PathVariable("id") @NotNull String ownerId, @Valid @RequestBody ImageDTO imageDTO) throws EntityNotFoundException {
         Image image = imageMapper.dtoToEntity(imageDTO);
         Client owner = clientService.get(ownerId); // Récupération du propriétaire de l'image
+        if (owner == null) throw new EntityNotFoundException("client not found with id " + ownerId);
         Image savedImage = imageService.save(owner, image);
         ImageDTO savedImageDTO = imageMapper.entityToDTO(savedImage);
         return savedImageDTO;
     }
 
-    @PutMapping("/updateImage/{clientId}/{imageId}")
+ /*   @PutMapping("/updateImage/{clientId}/{imageId}")
     public ImageDTO updateImage(@PathVariable("clientId") @NotNull String clientId,
                                 @PathVariable("imageId") @NotNull String imageId,
                                 @RequestBody ImageDTO imageUpdateDTO) throws EntityNotFoundException {
@@ -61,7 +62,7 @@ public class ImageController {
         Image imageToUpdate = imageService.get(imageId);
 
         if (imageToUpdate == null) throw new EntityNotFoundException("Image not found with id " + imageId);
-        if (!owner.getId().equals(clientId)) throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not allowed to update this image.");
+        if (owner == null) throw new EntityNotFoundException("client not found with id " + ownerId);
 
         imageToUpdate.setShared(imageUpdateDTO.isShared());
 
@@ -69,7 +70,7 @@ public class ImageController {
         ImageDTO updatedImageDTO = imageMapper.entityToDTO(imageToUpdate);
         return updatedImageDTO;
     }
-
+*/
     @DeleteMapping("/deleteImage/{clientId}/{imageId}")
     public ResponseEntity<String> deleteImage(@PathVariable("clientId") @NotNull String clientId,
                                               @PathVariable("imageId") @NotNull String imageId) throws EntityNotFoundException {
