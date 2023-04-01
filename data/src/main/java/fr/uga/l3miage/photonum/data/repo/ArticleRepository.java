@@ -35,7 +35,6 @@ public class ArticleRepository implements CRUDRepository<String, Article> {
         String query = "select a FROM Article a order by a.quantity" ;
         return entityManager.createQuery(query, Article.class).getResultList();
     }
-
     public void update(Article article) {
         Query query = entityManager.createQuery(
                 "UPDATE Article a SET a.quantity = :quantity, a.prixTotal = :prixTotal, a.impression = :impression WHERE a.id = :id"
