@@ -51,7 +51,7 @@ public class ImageServiceImpl implements ImageService {
     public Image findById(String id) {
         return imageRepository.findImageById(id);
     }
-    
+
     @Override
     public Image findByPath(String path) {
         return imageRepository.findImageByPath(path);
@@ -83,8 +83,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public void updateImageIsShared(String imageId, boolean isShared) {
-        imageRepository.updateImageIsShared(imageId, isShared);
+    public Image updateImageIsShared(String imageId, boolean isShared) {
+        return imageRepository.updateImageIsShared(imageId, isShared);
     }
 
     @Override
