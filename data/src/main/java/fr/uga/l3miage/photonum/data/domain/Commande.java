@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fr.uga.l3miage.photonum.data.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @AllArgsConstructor
@@ -25,7 +27,7 @@ public class Commande {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Basic(optional = false)
+    //@Basic(optional = false)
     private Date createdate;
 
     @Basic(optional = false)
@@ -34,10 +36,11 @@ public class Commande {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToMany
+    @OneToMany(mappedBy = "commande",fetch = FetchType.EAGER)
     private Set<Article> articles;
 
     @ManyToOne
+    @JsonIgnore
     private Client client;
 
 

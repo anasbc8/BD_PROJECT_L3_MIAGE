@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(value = "/api/v1", produces = "application/json")
+@RequestMapping(value = "/api/v1/commande", produces = "application/json")
 public class CommandeController {
     private final CommandeService commandeService;
     private final ClientService clientService;
@@ -29,7 +29,7 @@ public class CommandeController {
         this.commandeMapper = commandeMapper;
     }
 
-    @GetMapping("/commandes/{commandeId}")
+    @GetMapping("/{commandeId}")
     public ResponseEntity<CommandeDTO> getCommandeById(@PathVariable String commandeId) throws EntityNotFoundException {
         Commande commande = commandeService.get(commandeId);
         if (commande == null) {
@@ -38,14 +38,14 @@ public class CommandeController {
         CommandeDTO commandeDTO = commandeMapper.entityToDTO(commande);
         return  ResponseEntity.ok(commandeDTO);
     }
-    @GetMapping("/commandes")
+    @GetMapping("/")
     public ResponseEntity<Collection<CommandeDTO>> getAllCommandes() throws EntityNotFoundException {
         Collection<Commande> commandes = commandeService.list();
         Collection<CommandeDTO> commandesdto = commandeMapper.entityToDTO(commandes);
         return ResponseEntity.ok(commandesdto);
     }
 
-    @PostMapping("/addCommande/{id}")
+    @PostMapping("/{id}")
     public CommandeDTO createCommande(@PathVariable("id") @NotNull String ownerId, @RequestBody CommandeDTO commandeDTO) throws EntityNotFoundException {
         // get the owner
         Client owner = clientService.get(ownerId);
@@ -58,7 +58,7 @@ public class CommandeController {
     }
 
     //Manque Update
-    @DeleteMapping("/deleteCommande/{clientId}/{commandId}")
+    @DeleteMapping("/clientId/{clientId}/commandeId/{commandId}")
     public ResponseEntity<String> deleteImage(@PathVariable("clientId") @NotNull String ownerId,
                                               @PathVariable("commandId") @NotNull String commandId) throws EntityNotFoundException {
         Client owner = clientService.get(ownerId);
