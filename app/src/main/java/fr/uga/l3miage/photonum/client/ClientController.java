@@ -31,42 +31,39 @@ public class ClientController {
 
     @GetMapping
     public Collection<ClientDTO> getAllClients() {
-        return clientMapper.entityToDTO(clientService.list());
+        return clientMapper.entityToDTO(clientService.all());
     }
 
     @GetMapping("/{id}")
-    public ClientDTO getClientById(@PathVariable Long id) {
-        try {
-            return clientMapper.entityToDTO(clientService.get(id));
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
-        }
+    public ClientDTO getClientById(@PathVariable String id) throws EntityNotFoundException {
+        return clientMapper.entityToDTO(clientService.get(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDTO createClient(@RequestBody @Valid ClientDTO client) {
+    public ClientDTO createClient(@RequestBody @Valid ClientDTO client) throws EntityNotFoundException {
         try {
             final var entity = clientService.save(clientMapper.dtoToEntity(client));
             return clientMapper.entityToDTO(entity);
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
         }
     }
 
     @PutMapping("/{id}")
-    public ClientDTO updateClient(@PathVariable Long id, @RequestBody @Valid ClientDTO client) {
+    public ClientDTO updateClient(@PathVariable Long id, @RequestBody @Valid ClientDTO client)
+            throws EntityNotFoundException {
         try {
-            if (client.getId().equals(id)) {
-                var updated = clientService.updateClientInformation(clientMapper.dtoToEntity(client));
-                return clientMapper.entityToDTO(updated);
+            if (client.id().equals(id)) {
+                Client cliententity = clientMapper.dtoToEntity(client);
+                clientService.updateClientInformation(cliententity.getId(), cliententity.getPassword(),
+                        cliententity.getFirstName(), cliententity.getLastName());
+                return clientMapper.entityToDTO(cliententity);
             }
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
         }
     }
+
+}

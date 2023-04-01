@@ -1,15 +1,25 @@
 package fr.uga.l3miage.photonum.client;
 
-import fr.uga.l3miage.photonum.image.ImageDTO;
+import java.util.Collection;
+
 import fr.uga.l3miage.photonum.adresse.AdressDTO;
-import fr.uga.l3miage.photonum.impression.ImpressionDTO;
 import fr.uga.l3miage.photonum.commande.CommandeDTO;
+import fr.uga.l3miage.photonum.image.ImageDTO;
+import fr.uga.l3miage.photonum.impression.ImpressionDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.Collection;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public record ClientDTO(
                 @NotBlank String id,
                 @NotBlank String email,
