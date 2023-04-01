@@ -78,7 +78,7 @@ public class ImageRepository implements CRUDRepository<String, Image> {
      * @param imageId
      * @param isShared
      */
-    public void updateImageIsShared(String imageId, boolean isShared) {
+    public Image updateImageIsShared(String imageId, boolean isShared) {
         Image imageToUpdate = entityManager.find(Image.class, imageId);
         if (imageToUpdate.isShared()) {
             //If the image is already shared we can't set it to false
@@ -87,6 +87,7 @@ public class ImageRepository implements CRUDRepository<String, Image> {
         }
         imageToUpdate.setShared(isShared);
         entityManager.persist(imageToUpdate);
+        return imageToUpdate;
     }
 
     /**
