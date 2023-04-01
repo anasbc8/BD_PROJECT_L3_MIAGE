@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -55,13 +56,37 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Image findByOwner(String owner) throws EntityNotFoundException{
-        return null;
+    public List<Image> findByOwner(String owner) throws EntityNotFoundException{
+        return imageRepository.findImageByOwner(owner);
+    }
+
+    @Override
+    public List<Image> all() throws EntityNotFoundException {
+        return imageRepository.all();
+    }
+
+    @Override
+    public void deleteImageByOwnerAndPath(String clientId, String imagePath) throws EntityNotFoundException {
+        imageRepository.deleteImageByOwnerAndPath(clientId, imagePath);
+    }
+
+    @Override
+    public void updateImage(String clientId, String imageId, String newMetadata, double newResolution, boolean isShared) throws EntityNotFoundException {
+        imageRepository.updateImage(clientId, imageId, newMetadata, newResolution, isShared);
+    }
+
+    @Override
+    public List<Image> findImageByOwnerAndPath(String clientId, String imagePath) {
+        return imageRepository.findImageByOwnerAndPath(clientId, imagePath);
+    }
+
+    @Override
+    public List<Image> getSharedImages() {
+        return imageRepository.getSharedImages();
     }
 
     private void bindImageToClient(Client owner, Image image) {
         owner.addImage(image);
         image.setOwner(owner);
     }
-
 }

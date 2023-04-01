@@ -34,13 +34,6 @@ public class ClientRepository implements CRUDRepository<String, Client> {
         return entityManager.createQuery(query, Client.class).getResultList();
     }
 
-    public Client getClientById(Long clientId) {
-        String query = "SELECT c FROM Client c WHERE c.id = :clientId";
-        return entityManager.createQuery(query, Client.class)
-        .setParameter("clientId", clientId)
-        .getSingleResult();
-    }
-
     public void updateClientInformation(String clientId, String password, String firstName, String lastName) {
         String query = "UPDATE Client c SET c.password = :password, c.firstName = :firstName, c.lastName = :lastName WHERE c.id = :clientId";
         entityManager.createQuery(query)

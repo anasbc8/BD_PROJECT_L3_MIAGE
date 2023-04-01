@@ -73,6 +73,13 @@ public class ImageRepository implements CRUDRepository<String, Image> {
                 .getResultList();
     }
 
+    public List<Image> findImageByOwner(String clientId) {
+        String query = "Select i FROM Image i WHERE i.owner.id = :clientId";
+        return entityManager.createQuery(query)
+                .setParameter("clientId", clientId)
+                .getResultList();
+    }
+
     //récupérer la liste des images partagées
     public List<Image> getSharedImages() {
         String query = "SELECT i FROM Image i WHERE i.isShared = true";
