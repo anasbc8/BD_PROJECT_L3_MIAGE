@@ -40,7 +40,7 @@ public interface ImageService extends BaseService<Image, String> {
     void deleteImagesByOwner(String owner) throws EntityNotFoundException;
 
     //update image isShared
-    void updateImageIsShared(String imageId, boolean isShared) throws EntityNotFoundException;
+    Image updateImageIsShared(String imageId, boolean isShared) throws EntityNotFoundException;
 
     //update image path
     void updateImagePath(String imageId, String path) throws EntityNotFoundException;
