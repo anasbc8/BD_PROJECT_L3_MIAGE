@@ -9,26 +9,43 @@ import java.util.List;
 
 public interface ImageService extends BaseService<Image, String> {
 
-    public Image save(Client owner, Image image) ;
+    //save image
+    Image save(Client owner, Image image) ;
 
-    public Image get(String id) throws EntityNotFoundException;
+    //get image by id
+    Image get(String id) throws EntityNotFoundException;
 
-    public void delete(String id) throws EntityNotFoundException;
+    //delete image by id
+    void delete(String id) throws EntityNotFoundException;
+
+    //find image by id
+    Image findById(String id) throws EntityNotFoundException;
 
     //find image by path
-    public Image findByPath(String path) throws EntityNotFoundException;
+    Image findByPath(String path) throws EntityNotFoundException;
 
     //get images from owner
-    public List<Image> findByOwner(String owner) throws EntityNotFoundException;
+    List<Image> findByOwner(String owner) throws EntityNotFoundException;
 
-    public List<Image> all() throws EntityNotFoundException;
+    //get all images
+    List<Image> all() throws EntityNotFoundException;
 
-    void deleteImageByOwnerAndPath(String clientId, String imagePath) throws EntityNotFoundException;
+    //get image by id
+    void deleteImageById(String imageId) throws EntityNotFoundException;
 
-    void updateImage(String clientId, String imageId, String newMetadata, double newResolution, boolean isShared) throws EntityNotFoundException;
+    //get image by path
+    void deleteImageByPath(String path) throws EntityNotFoundException;
 
-    public List<Image> findImageByOwnerAndPath(String clientId, String imagePath);
+    //get image by owner
+    void deleteImagesByOwner(String owner) throws EntityNotFoundException;
 
+    //update image isShared
+    void updateImageIsShared(String imageId, boolean isShared) throws EntityNotFoundException;
+
+    //update image path
+    void updateImagePath(String imageId, String path) throws EntityNotFoundException;
+
+    //get all shared images
     public List<Image> getSharedImages();
 
 }

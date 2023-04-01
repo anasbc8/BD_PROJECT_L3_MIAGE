@@ -2,7 +2,6 @@ package fr.uga.l3miage.photonum.service;
 import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.data.repo.ImageRepository;
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +13,7 @@ import java.util.List;
 @Transactional
 public class ImageServiceImpl implements ImageService {
 
-    private ImageRepository imageRepository;
-
-    private EntityManager entityManager;
+    private final ImageRepository imageRepository;
 
     @Autowired
     public ImageServiceImpl(ImageRepository imageRepository) {
@@ -31,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Image get(String id) throws EntityNotFoundException {
+    public Image get(String id) {
         return imageRepository.get(id);
     }
 
@@ -41,43 +38,58 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Image update(Image image) throws EntityNotFoundException {
+    public Image update(Image image) {
         return imageRepository.save(image);
     }
 
     @Override
-    public void delete(String id) throws EntityNotFoundException {
+    public void delete(String id) {
         imageRepository.delete(imageRepository.get(id));
     }
 
     @Override
-    public Image findByPath(String path) throws EntityNotFoundException{
-        return (Image) imageRepository.findImageByPath(path);
+    public Image findById(String id) {
+        return imageRepository.findImageById(id);
+    }
+    
+    @Override
+    public Image findByPath(String path) {
+        return imageRepository.findImageByPath(path);
     }
 
     @Override
-    public List<Image> findByOwner(String owner) throws EntityNotFoundException{
-        return imageRepository.findImageByOwner(owner);
+    public List<Image> findByOwner(String owner) {
+        return imageRepository.findImagesByOwner(owner);
     }
 
     @Override
-    public List<Image> all() throws EntityNotFoundException {
+    public List<Image> all() {
         return imageRepository.all();
     }
 
     @Override
-    public void deleteImageByOwnerAndPath(String clientId, String imagePath) throws EntityNotFoundException {
-        imageRepository.deleteImageByOwnerAndPath(clientId, imagePath);
+    public void deleteImageById(String id) {
+        imageRepository.deleteImageById(id);
     }
 
     @Override
-    public void updateImage(String clientId, String imageId, String newMetadata, double newResolution, boolean isShared) throws EntityNotFoundException {
-        imageRepository.updateImage(clientId, imageId, newMetadata, newResolution, isShared);
+    public void deleteImageByPath(String path) {
+        imageRepository.deleteImageByPath(path);
     }
 
     @Override
-    public List<Image> findImageByOwnerAndPath(String clientId, String imagePath) {
-        return imageRepository.findImageByOwnerAndPath(clientId, imagePath);
+    public void deleteImagesByOwner(String owner) {
+        imageRepository.deleteImagesByOwner(owner);
+    }
+
+    @Override
+    public void updateImageIsShared(String imageId, boolean isShared) {
+        imageRepository.updateImageIsShared(imageId, isShared);
+    }
+
+    @Override
+    public void updateImagePath(String imageId, String newPath) {
+        imageRepository.updateImagePath(imageId, newPath);
     }
 
     @Override
