@@ -4,10 +4,13 @@ import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.repo.CalendrierRepository;
 import fr.uga.l3miage.photonum.data.repo.CommandeRepositoy;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class CommandeServiceImpl implements CommandeService{
     private CommandeRepositoy commandeRepository;
 
@@ -19,6 +22,7 @@ public class CommandeServiceImpl implements CommandeService{
 
     @Override
     public Commande save(Commande commande) {
+
         return commandeRepository.save(commande);
     }
 

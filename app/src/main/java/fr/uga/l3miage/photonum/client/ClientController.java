@@ -70,14 +70,3 @@ public class ClientController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
         }
     }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteClient(@PathVariable Long id) {
-        try {
-            clientService.delete(id);
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
-        }
-    }
-}
