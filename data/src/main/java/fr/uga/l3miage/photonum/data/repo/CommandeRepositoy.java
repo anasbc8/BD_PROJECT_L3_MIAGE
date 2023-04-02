@@ -44,11 +44,12 @@ public class CommandeRepositoy implements CRUDRepository<String, Commande> {
                 .getResultList();
     }
 
-    public void updateCommande(String commandeId, Status newStatus) {
+    public Commande updateCommande(String commandeId, Status newStatus) {
         Commande commande = entityManager.find(Commande.class, commandeId);
         if (commande != null) {
             commande.setStatus(newStatus);
         }
+        return commande ;
     }
 
 }

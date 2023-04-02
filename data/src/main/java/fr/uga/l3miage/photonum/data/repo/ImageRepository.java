@@ -80,7 +80,7 @@ public class ImageRepository implements CRUDRepository<String, Image> {
      */
     public Image updateImageIsShared(String imageId, boolean isShared) {
         Image imageToUpdate = entityManager.find(Image.class, imageId);
-        if (imageToUpdate.isShared()) {
+        if (imageToUpdate.isShared() && !isShared) {
             //If the image is already shared we can't set it to false
             //throw an exception saying that the image is shared and can't be set to private
             throw new IllegalArgumentException("The image is already shared, can't be set to private again !");

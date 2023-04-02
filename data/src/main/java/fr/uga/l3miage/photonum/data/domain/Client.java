@@ -2,6 +2,7 @@ package fr.uga.l3miage.photonum.data.domain;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,14 +23,15 @@ public class Client {
     private String lastName;
 
     private String password;
-    @OneToMany
+    @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
     private Set<Image> ownedImages;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Adress> adresses;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Impression> impressions;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "client")
+    @JsonIgnore
     private Set<Commande> commandes;
 
     public void addImage(Image image) {

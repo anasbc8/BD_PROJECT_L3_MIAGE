@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("client")
+@RequestMapping(value = "/api/v1/client", produces = "application/json")
 public class ClientController {
 
     private final ClientService clientService;
@@ -29,7 +29,7 @@ public class ClientController {
         this.clientMapper = clientMapper;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public Collection<ClientDTO> getAllClients() {
         return clientMapper.entityToDTO(clientService.all());
     }
@@ -39,9 +39,9 @@ public class ClientController {
         return clientMapper.entityToDTO(clientService.get(id));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDTO createClient(@RequestBody @Valid ClientDTO client) throws EntityNotFoundException {
+    public ClientDTO createClient(@RequestBody ClientDTO client) throws EntityNotFoundException {
         try {
             final var entity = clientService.save(clientMapper.dtoToEntity(client));
             return clientMapper.entityToDTO(entity);
@@ -51,7 +51,7 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ClientDTO updateClient(@PathVariable Long id, @RequestBody @Valid ClientDTO client)
+    public ClientDTO updateClient(@PathVariable Long id, @RequestBody ClientDTO client)
             throws EntityNotFoundException {
         try {
             if (client.id().equals(id)) {

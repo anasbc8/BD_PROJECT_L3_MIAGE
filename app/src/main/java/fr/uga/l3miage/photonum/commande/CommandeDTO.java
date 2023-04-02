@@ -9,19 +9,19 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.Set;
 
-public record CommandeDTO (
-    @NotBlank(message = "command's id  is mandatory")
-     String id,
+public record CommandeDTO(
+        @NotBlank(message = "command's id  is mandatory")
+        String id,
 
-     Date createdate,
+        Date createdate,
 
-     Double totalPrice,
+        Double totalPrice,
 
-    @Enumerated(EnumType.STRING)
-     Status status,
+        @Enumerated(EnumType.STRING)
+        Status status,
 
-     Set<Article> articles,
+        Set<Article> articles,
 
-     Client client
-)
-{}
+        Client client
+) {
+}
