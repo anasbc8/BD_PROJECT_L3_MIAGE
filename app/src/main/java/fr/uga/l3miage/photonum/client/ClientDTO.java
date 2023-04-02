@@ -1,11 +1,11 @@
 package fr.uga.l3miage.photonum.client;
 
-import java.util.Collection;
-
-import fr.uga.l3miage.photonum.commande.CommandeDTO;
-import fr.uga.l3miage.photonum.image.ImageDTO;
+import fr.uga.l3miage.photonum.data.domain.Commande;
+import fr.uga.l3miage.photonum.data.domain.Image;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
+
+import java.util.Collection;
 
 
 public record ClientDTO(
@@ -15,9 +15,9 @@ public record ClientDTO(
                 @NotBlank String lastName,
                 @NotBlank String password,
 
-                @Null Collection<ImageDTO> ownedImages,
+                @Null Collection<Image> ownedImages,
 
-                @Null Collection<CommandeDTO> commandes
+                @Null Collection<Commande> commandes
 
 ) {
 }
