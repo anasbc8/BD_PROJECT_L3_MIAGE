@@ -5,13 +5,9 @@ import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import fr.uga.l3miage.photonum.service.ImageService;
 import fr.uga.l3miage.photonum.service.ClientService;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 
@@ -64,7 +60,7 @@ public class ImageController {
 
         if (imageToUpdate == null) return ResponseEntity.badRequest().body("Image not found with id " + imageId);
         if (owner == null) return ResponseEntity.badRequest().body("client not found with id " + clientId);
-        if (imageToUpdate.isShared()) return ResponseEntity.badRequest().body("The image is already shared, can't be set to private again");
+        if (imageToUpdate.isShared()) return ResponseEntity.badRequest().body("The image is already shared / can't be set to private again");
 
         try {
             imageToUpdate.setShared(imageUpdateDTO.isShared());
@@ -83,6 +79,7 @@ public class ImageController {
         Image imageToDelete = imageService.get(imageId);
         if (imageToDelete == null) return ResponseEntity.badRequest().body("Image not found with id " + imageId);
         if (owner == null) return ResponseEntity.badRequest().body("client not found with id " + clientId);
+        if (imageToDelete.isShared()) return ResponseEntity.badRequest().body("The image with id '"+imageId +"' is shared and can not be deleted");
 
         imageService.delete(imageId);
         return ResponseEntity.ok("Image deleted successfully.");
