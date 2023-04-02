@@ -2,19 +2,14 @@ package fr.uga.l3miage.photonum.commande;
 
 import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.data.domain.Commande;
-import fr.uga.l3miage.photonum.data.domain.Image;
-import fr.uga.l3miage.photonum.image.ImageDTO;
 import fr.uga.l3miage.photonum.service.ClientService;
 import fr.uga.l3miage.photonum.service.CommandeService;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 
@@ -42,7 +37,7 @@ public class CommandeController {
         return ResponseEntity.ok(commandeDTO);
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public ResponseEntity<Collection<CommandeDTO>> getAllCommandes() throws EntityNotFoundException {
         Collection<Commande> commandes = commandeService.list();
         Collection<CommandeDTO> commandesdto = commandeMapper.entityToDTO(commandes);
