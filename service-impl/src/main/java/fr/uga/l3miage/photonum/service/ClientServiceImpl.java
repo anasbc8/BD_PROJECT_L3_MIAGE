@@ -44,4 +44,5 @@ public class ClientServiceImpl implements ClientService {
     public List<Commande> getCommandesByClientId(String clientId) {
         return clientRepository.getCommandesByClientId(clientId);
     }
+    
 }

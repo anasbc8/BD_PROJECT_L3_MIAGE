@@ -25,7 +25,9 @@ private ArticleRepository articleRepository ;
 
     @Override
     public Article save(Article article) {
-        return articleRepository.save(article);
+        articleRepository.save(article);
+        bindArticleToCommande(article);
+        return article;
     }
 
     @Override
@@ -53,6 +55,10 @@ private ArticleRepository articleRepository ;
     public Article update(Article article) throws EntityNotFoundException {
          articleRepository.update(article);
         return article;
+    }
+
+    private void bindArticleToCommande(Article article) {
+        article.getCommande().addArticle(article);
     }
 
 }

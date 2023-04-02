@@ -1,39 +1,51 @@
 package fr.uga.l3miage.photonum.article;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import fr.uga.l3miage.photonum.service.ArticleService;
+import fr.uga.l3miage.photonum.service.CommandeService;
+import fr.uga.l3miage.photonum.service.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Collection;
 
 
 @RestController
-@RequestMapping("/articles")
+@RequestMapping(value = "/api/v1/articles", produces = "application/json")
 public class ArticleController {
-/*
-    @Autowired
-    private ArticleService articleService;
 
-    @GetMapping
-    public List<ArticleDTO> getAllArticles() {
-        return articleService.getAllArticles();
+    private final ArticleService articleService;
+    private final CommandeService commandeService;
+    private final ArticleMapper articleMapper;
+
+    public ArticleController(ArticleService articleService, CommandeService commandeService, ArticleMapper articleMapper) {
+        this.articleService = articleService;
+        this.commandeService = commandeService;
+        this.articleMapper = articleMapper;
+    }
+
+    @GetMapping("/all")
+    public Collection<ArticleDTO> getAllArticles() {
+        return articleMapper.entityToDTO(articleService.list());
     }
 
     @GetMapping("/{id}")
-    public ArticleDTO getArticleById(@PathVariable Long id) {
-        return articleService.getArticleById(id);
+    public ArticleDTO getArticleById(@PathVariable String id) throws EntityNotFoundException {
+        try {
+            return articleMapper.entityToDTO(articleService.get(id));
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+        }
     }
 
-    @PostMapping
-    public ArticleDTO createArticle(@RequestBody ArticleDTO articleDTO) {
-        return articleService.createArticle(articleDTO);
+    @PostMapping("/addArticle/{id}")
+    public ArticleDTO addArticle(@PathVariable String id, @RequestBody ArticleDTO article) throws EntityNotFoundException {
+        try {
+            final var entity = articleService.save(articleMapper.dtoToEntity(article));
+            return articleMapper.entityToDTO(entity);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
+        }
     }
 
-    @PutMapping("/{id}")
-    public ArticleDTO updateArticle(@PathVariable Long id, @RequestBody ArticleDTO articleDTO) {
-        return articleService.updateArticle(id, articleDTO);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteArticle(@PathVariable Long id) {
-        articleService.deleteArticle(id);
-    }
-    */
 }

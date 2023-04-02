@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.service;
 
+import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.repo.CalendrierRepository;
@@ -48,6 +49,16 @@ public class CommandeServiceImpl implements CommandeService{
     @Override
     public Commande update(Commande commande) throws EntityNotFoundException {
         return commandeRepository.updateCommande(commande.getId(),commande.getStatus()) ;
+    }
+
+    @Override
+    public void addArticle(String id, Article article) throws EntityNotFoundException {
+        Commande commande = get(id);
+        if(commande==null){
+            throw new EntityNotFoundException("Commande with id=%d not found".formatted(id));
+        }else {
+            commandeRepository.addArticle(id,article);
+        }
     }
 
 }

@@ -87,4 +87,11 @@ public class ImageController {
         imageService.delete(imageId);
         return ResponseEntity.ok("Image deleted successfully.");
     }
+
+    @GetMapping("/shared")
+    public ResponseEntity<Collection<ImageDTO>> getSharedImages() throws EntityNotFoundException {
+        Collection<Image> images = imageService.getSharedImages();
+        Collection<ImageDTO> imageDTOs = imageMapper.entityToDTO(images);
+        return ResponseEntity.ok(imageDTOs);
+    }
 }

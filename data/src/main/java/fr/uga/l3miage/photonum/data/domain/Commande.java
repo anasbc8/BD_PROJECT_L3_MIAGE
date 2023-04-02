@@ -43,5 +43,8 @@ public class Commande {
     @JsonIgnore
     private Client client;
 
+    public void addArticle(Article article) {
+        articles.add(article);
+    }
 
 }

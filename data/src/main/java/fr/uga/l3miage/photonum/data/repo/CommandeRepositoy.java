@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.repo;
 
+import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.domain.enums.Status;
 import jakarta.persistence.EntityManager;
@@ -50,6 +51,13 @@ public class CommandeRepositoy implements CRUDRepository<String, Commande> {
             commande.setStatus(newStatus);
         }
         return commande ;
+    }
+
+    public void addArticle(String commandeId, Article article) {
+        Commande commande = entityManager.find(Commande.class, commandeId);
+        if (commande != null) {
+            commande.addArticle(article);
+        }
     }
 
 }
