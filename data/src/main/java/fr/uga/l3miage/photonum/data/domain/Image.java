@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class Image {
     private double resolution;
     private boolean isShared;
     @ManyToOne
+    @JsonIgnore
     private Client owner;
 
 }

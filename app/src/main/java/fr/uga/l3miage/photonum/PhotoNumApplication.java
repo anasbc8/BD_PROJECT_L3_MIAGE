@@ -1,9 +1,6 @@
 package fr.uga.l3miage.photonum;
 
-import fr.uga.l3miage.photonum.data.domain.Article;
-import fr.uga.l3miage.photonum.data.domain.Client;
-import fr.uga.l3miage.photonum.data.domain.Commande;
-import fr.uga.l3miage.photonum.data.domain.Impression;
+import fr.uga.l3miage.photonum.data.domain.*;
 import fr.uga.l3miage.photonum.data.domain.enums.Status;
 import fr.uga.l3miage.photonum.data.repo.ClientRepository;
 import fr.uga.l3miage.photonum.data.repo.ImpressionRepository;
@@ -43,6 +40,5 @@ public class PhotoNumApplication implements CommandLineRunner {
         mouadCommande.setArticles(Set.of());
         mouadCommande.setTotalPrice(1000.0);
         entityManager.persist(mouadCommande);
-
     }
 }
