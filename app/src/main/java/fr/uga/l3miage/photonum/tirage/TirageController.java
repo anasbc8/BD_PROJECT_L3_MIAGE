@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/tirages")
+@RequestMapping(value = "/api/v1/Tirage", produces = "application/json")
 public class TirageController {
 
     private final TirageService tirageService;

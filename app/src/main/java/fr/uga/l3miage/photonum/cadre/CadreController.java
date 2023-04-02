@@ -1,10 +1,9 @@
 package fr.uga.l3miage.photonum.cadre;
 
 import fr.uga.l3miage.photonum.data.domain.Cadre;
-import fr.uga.l3miage.photonum.data.domain.Tirage;
+
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import fr.uga.l3miage.photonum.service.CadreService;
-import fr.uga.l3miage.photonum.tirage.TirageDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
