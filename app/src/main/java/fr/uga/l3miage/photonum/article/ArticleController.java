@@ -1,20 +1,13 @@
 package fr.uga.l3miage.photonum.article;
 
-import fr.uga.l3miage.photonum.data.domain.Article;
-import fr.uga.l3miage.photonum.service.EntityNotFoundException;
-import fr.uga.l3miage.photonum.service.ArticleService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 @RequestMapping("/articles")
 public class ArticleController {
-
+/*
     @Autowired
     private ArticleService articleService;
 
@@ -42,5 +35,5 @@ public class ArticleController {
     public void deleteArticle(@PathVariable Long id) {
         articleService.deleteArticle(id);
     }
-    
+    */
 }

@@ -1,9 +1,8 @@
 package fr.uga.l3miage.photonum;
 
-import fr.uga.l3miage.photonum.data.domain.*;
+import fr.uga.l3miage.photonum.data.domain.Client;
+import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.domain.enums.Status;
-import fr.uga.l3miage.photonum.data.repo.ClientRepository;
-import fr.uga.l3miage.photonum.data.repo.ImpressionRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 

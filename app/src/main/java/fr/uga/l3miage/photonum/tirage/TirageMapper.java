@@ -1,8 +1,6 @@
 package fr.uga.l3miage.photonum.tirage;
 
 import fr.uga.l3miage.photonum.data.domain.Tirage;
-import fr.uga.l3miage.photonum.data.domain.Impression;
-import fr.uga.l3miage.photonum.impression.ImpressionDTO;
 
 import java.util.Collection;
 
