@@ -35,8 +35,13 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public ClientDTO getClientById(@PathVariable String id) throws EntityNotFoundException {
-        return clientMapper.entityToDTO(clientService.get(id));
+    public ResponseEntity<ClientDTO> getClientById(@PathVariable String id) throws EntityNotFoundException {
+        Client client = clientService.get(id);
+        if (client == null) {
+            return ResponseEntity.notFound().build();
+        }
+        ClientDTO clientDTO = clientMapper.entityToDTO(client);
+        return ResponseEntity.ok(clientDTO);
     }
 
     @PostMapping("/create")
@@ -50,8 +55,8 @@ public class ClientController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ClientDTO updateClient(@PathVariable Long id, @RequestBody ClientDTO client)
+    @PutMapping("/updateClient/{id}")
+    public ClientDTO updateClient(@PathVariable String id, @RequestBody ClientDTO client)
             throws EntityNotFoundException {
         try {
             if (client.id().equals(id)) {
@@ -61,6 +66,17 @@ public class ClientController {
                 return clientMapper.entityToDTO(cliententity);
             }
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
+        }
+    }
+
+    @DeleteMapping("del/{id}")
+    public ResponseEntity<String> deleteClient(@PathVariable String id) throws EntityNotFoundException {
+        Client client = clientService.get(id);
+        try {
+            clientService.delete(client);
+            return new ResponseEntity<>("Client with id '"+ id +"' have been deleted successfully", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
         }

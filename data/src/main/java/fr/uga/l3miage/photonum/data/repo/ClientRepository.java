@@ -27,7 +27,7 @@ public class ClientRepository implements CRUDRepository<String, Client> {
 
     @Override
     public void delete(Client client) {
-        entityManager.remove(client);
+        entityManager.remove(entityManager.merge(client));
     }
 
     @Override
