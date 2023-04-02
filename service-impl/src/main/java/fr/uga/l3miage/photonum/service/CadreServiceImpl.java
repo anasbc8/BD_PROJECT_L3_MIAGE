@@ -29,6 +29,11 @@ public class CadreServiceImpl implements CadreService {
     }
 
     @Override
+    public void delete(String id) {
+        cadreRepository.delete(cadreRepository.get(id));
+    }
+
+    @Override
     public Cadre save(Cadre cadre) {
         return cadreRepository.save(cadre);
     }

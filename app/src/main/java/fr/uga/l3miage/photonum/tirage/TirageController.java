@@ -32,28 +32,28 @@ public class TirageController {
         return ResponseEntity.ok(tirageDTO);
     }
 
-    @GetMapping("/tirages")
+    @GetMapping("/all")
     public ResponseEntity<Collection<TirageDTO>> getAllTirages() throws EntityNotFoundException {
         Collection<Tirage> tirages = tirageService.list();
         Collection<TirageDTO> tirageDTOs = tirageMapper.entityToDTO(tirages);
         return ResponseEntity.ok(tirageDTOs);
     }
 
-    @PostMapping
+    @PostMapping("/addTirage/")
     public ResponseEntity<TirageDTO> createTirage(@RequestBody @Valid TirageDTO tirageDTO) {
         Tirage tirage = tirageMapper.dtoToEntity(tirageDTO);
         tirageService.save(tirage);
         return ResponseEntity.ok(tirageDTO);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateTirage/{id}")
     public ResponseEntity<TirageDTO> updateTirage(@PathVariable String id, @RequestBody @Valid TirageDTO tirageDTO) throws EntityNotFoundException {
         Tirage tirage = tirageMapper.dtoToEntity(tirageDTO);
         tirageService.update(tirage);
         return ResponseEntity.ok(tirageDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteTirage/{id}")
     public ResponseEntity<TirageDTO> deleteTirage(@PathVariable String id) throws EntityNotFoundException {
         Tirage tirage = tirageService.get(id);
         if (tirage == null) {
