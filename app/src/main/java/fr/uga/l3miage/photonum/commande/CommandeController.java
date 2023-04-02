@@ -4,15 +4,17 @@ import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.image.ImageDTO;
-import fr.uga.l3miage.photonum.image.ImageMapper;
 import fr.uga.l3miage.photonum.service.ClientService;
 import fr.uga.l3miage.photonum.service.CommandeService;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
-import fr.uga.l3miage.photonum.service.ImageService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 
@@ -22,6 +24,7 @@ public class CommandeController {
     private final CommandeService commandeService;
     private final ClientService clientService;
     private final CommandeMapper commandeMapper;
+
     @Autowired
     public CommandeController(CommandeService commandeService, ClientService clientService, CommandeMapper commandeMapper) {
         this.commandeService = commandeService;
@@ -36,8 +39,9 @@ public class CommandeController {
             throw new EntityNotFoundException("commande not found");
         }
         CommandeDTO commandeDTO = commandeMapper.entityToDTO(commande);
-        return  ResponseEntity.ok(commandeDTO);
+        return ResponseEntity.ok(commandeDTO);
     }
+
     @GetMapping("/")
     public ResponseEntity<Collection<CommandeDTO>> getAllCommandes() throws EntityNotFoundException {
         Collection<Commande> commandes = commandeService.list();
@@ -57,19 +61,35 @@ public class CommandeController {
         return commandeMapper.entityToDTO(savedImage);
     }
 
-    //Manque Update
     @DeleteMapping("/clientId/{clientId}/commandeId/{commandId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteImage(@PathVariable("clientId") @NotNull String ownerId,
                                               @PathVariable("commandId") @NotNull String commandId) throws EntityNotFoundException {
         Client owner = clientService.get(ownerId);
         Commande commandeToDelete = commandeService.get(commandId);
         if (commandeToDelete == null || owner == null) {
-            throw new EntityNotFoundException("commande or owner not found ") ;
+            throw new EntityNotFoundException("commande or owner not found ");
         }
 
         commandeService.delete(commandId);
         return ResponseEntity.ok("Commande deleted successfully.");
     }
 
+    @PutMapping("/updateCommande/{clientId}/{commandeId}")
+    public ResponseEntity<String> updateSharedImage(@PathVariable("clientId") @NotNull String clientId,
+                                                    @PathVariable("commandeId") @NotNull String commandeId,
+                                                    @RequestBody CommandeDTO commandeUpdateDTO) throws EntityNotFoundException {
+
+        Client owner = clientService.get(clientId);
+        Commande commandeToUpdate = commandeService.get(commandeId);
+
+        if (commandeToUpdate == null)
+            return ResponseEntity.badRequest().body("Commande not found with id " + commandeId);
+        if (owner == null) return ResponseEntity.badRequest().body("client not found with id " + clientId);
+        commandeToUpdate.setStatus(commandeUpdateDTO.status());
+        var commandeToUpdate2 = commandeService.update(commandeToUpdate);
+        return ResponseEntity.ok("Commande Updated ");
+
+    }
 
 }

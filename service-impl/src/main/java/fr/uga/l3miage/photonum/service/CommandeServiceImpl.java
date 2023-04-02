@@ -47,7 +47,7 @@ public class CommandeServiceImpl implements CommandeService{
     }
     @Override
     public Commande update(Commande commande) throws EntityNotFoundException {
-        return commandeRepository.save(commande) ;
+        return commandeRepository.updateCommande(commande.getId(),commande.getStatus()) ;
     }
 
 }
