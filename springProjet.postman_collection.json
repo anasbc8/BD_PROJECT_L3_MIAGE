@@ -1,0 +1,677 @@
+{
+	"info": {
+		"_postman_id": "4dd5fbe7-4ac0-4345-8487-c84e4b65c76f",
+		"name": "springProjet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15417098"
+	},
+	"item": [
+		{
+			"name": "Create client",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"johndoe@example.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"password\" : \"$adoza@#zn\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/client/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"client",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update client",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"928d6a25-0b1b-4f1c-9e95-b1437516b51e\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Frusciante\",\n    \"password\" : \"rtyuioijhgv\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/client/928d6a25-0b1b-4f1c-9e95-b1437516b51e",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"client",
+						"928d6a25-0b1b-4f1c-9e95-b1437516b51e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getClientbyId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/client/928d6a25-0b1b-4f1c-9e95-b1437516b51e",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"client",
+						"928d6a25-0b1b-4f1c-9e95-b1437516b51e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"path\": \"/image132581.jpg\",\n    \"metadata\": \"desc1321\",\n    \"resolution\":   1080.0,\n    \"isShared\": false\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/image/addImage/928d6a25-0b1b-4f1c-9e95-b1437516b51e",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"addImage",
+						"928d6a25-0b1b-4f1c-9e95-b1437516b51e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllimages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/image/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllimages Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/image/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create image Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"path\": \"/image1321.jpg\",\n    \"metadata\": \"desc1321\",\n    \"resolution\":   1080.0,\n    \"isShared\": true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/image/addImage/928d6a25-0b1b-4f1c-9e95-b1437516b51e",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"addImage",
+						"928d6a25-0b1b-4f1c-9e95-b1437516b51e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSharedImages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/image/shared",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"shared"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Image",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"isShared\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/image/updateImage/928d6a25-0b1b-4f1c-9e95-b1437516b51e/a65e6627-1d86-406d-bdb5-85ccf0c03761",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"updateImage",
+						"928d6a25-0b1b-4f1c-9e95-b1437516b51e",
+						"a65e6627-1d86-406d-bdb5-85ccf0c03761"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete image",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/image/deleteImage/2d9a7ec1-c738-4c3c-8eff-eae0c4ba1bd9/1ebc6981-8c86-47d1-9827-9be7ac4aa229",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"deleteImage",
+						"2d9a7ec1-c738-4c3c-8eff-eae0c4ba1bd9",
+						"1ebc6981-8c86-47d1-9827-9be7ac4aa229"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSharedImages Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/image/shared",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"shared"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create image Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"path\": \"/image1321.jpg\",\n    \"metadata\": \"desc1321\",\n    \"resolution\":   1080.0,\n    \"isShared\": false\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/image/addImage/928d6a25-0b1b-4f1c-9e95-b1437516b51e",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"addImage",
+						"928d6a25-0b1b-4f1c-9e95-b1437516b51e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getImageById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/image/5f0e7620-8675-4611-a93a-39bb20f51551",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"image",
+						"5f0e7620-8675-4611-a93a-39bb20f51551"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create commande",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"totalPrice\": 28.0,\n    \"status\": \"EXPEDIE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/commande/ab5db5de-32e9-4600-a377-3c276012b15b",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"commande",
+						"ab5db5de-32e9-4600-a377-3c276012b15b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCommandeById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/commande/15949aa2-e55d-4768-b020-0eca33a88617",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"commande",
+						"15949aa2-e55d-4768-b020-0eca33a88617"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCommandes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/commande/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"commande",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quantity\": 8,\r\n    \"prixTotal\": 16.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/articles/addArticle",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"addArticle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete article",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/articles/delete/54efa42e-23a0-428f-a406-19abf9930764",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"delete",
+						"54efa42e-23a0-428f-a406-19abf9930764"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create tirage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prix\": 8.0,\r\n    \"photos\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/tirage/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tirage",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete tirage",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/tirage/deleteTirage/db6880a3-6a3b-4363-b238-bfc176e95686",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tirage",
+						"deleteTirage",
+						"db6880a3-6a3b-4363-b238-bfc176e95686"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create album",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Mon gzar pictures\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/album/addAlbum",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"album",
+						"addAlbum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete album",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/album/deleteAlbum/6b497d8d-51d1-4a71-b71d-bc654483bb7a",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"album",
+						"deleteAlbum",
+						"6b497d8d-51d1-4a71-b71d-bc654483bb7a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create cadre",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prix\": 8.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/cadre/addCadre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"cadre",
+						"addCadre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete cadre",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/cadre/deleteCadre/10e39716-fee2-4597-aa34-66bbcb897543",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"cadre",
+						"deleteCadre",
+						"10e39716-fee2-4597-aa34-66bbcb897543"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create calendrier",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prix\": 8.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/calendrier/addCalendrier/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"calendrier",
+						"addCalendrier",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete calendrier",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/cadre/deleteCalendrier/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"cadre",
+						"deleteCalendrier",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
